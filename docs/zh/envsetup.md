@@ -44,10 +44,12 @@
    ~/git/ofbiz-framework/plugins$ln -s ../../sand-openapi sand-openapi
    ```
 
+<br/><br/>
+
 ### VSCode开发vuejs子项目
 即在idea的java项目中，套了一个vscode来开发vuejs子项目。步骤如下：
 
-1. 下载并安装[VSCode](https://code.visualstudio.com/download))]
+1. 下载并安装[VSCode](https://code.visualstudio.com/download)
 
 2. 在VSCode中，新建vuejs目录，在vuejs目录下，通过vue创建openapi项目：
 
@@ -57,7 +59,8 @@
    ```
    运行结果如下图所示：
 
-   <img src="images/vue-create-openapi.png" width="700" alt="vue-create-openapi">
+   <img src="images/vue-create-openapi.png" width="500" alt="vue-create-openapi">
+<br/>
 
 3. 按照上面提示的命令，完成openapi项目初始化，并启动：
    ```shell
@@ -67,7 +70,7 @@
    npm run dev
    ```
 
-4. 在浏览器中打开http://localhost:5173/，验证页面访问正常。
+4. 在浏览器中打开http://localhost:5173/ ，验证页面访问正常。
 
 5. 编辑vuejs/openapi/src/vite.config.js：
    ```javascript
@@ -102,17 +105,22 @@
    npm install -D @vitejs/plugin-vue-jsx
    npm install -D @types/node
    ```
-   
+
+<br/><br/>
+
 ### vite+vue3+swagger-ui
 说明：开发和调试vue3代码，是在vscode中，打开vuejs/openapi目录，如下图所示：
 
-<img src="images/sand-openapi-vscode.png" alt="sand-openapi-vscode" width="500"/>
+<img src="images/sand-openapi-vscode.png" alt="sand-openapi-vscode" width="300"/>
+
+<br/>
 
 本小节内容均是在vuejs/openapi目录下进行。
 
-1. 按照[swagger-ui](https://github.com/swagger-api/swagger-ui/)的README.md中的说明，swagger-ui-dist适合单页应用开发，正符合在本模块vue3里调用，所以安装swagger-ui-dist和@types/swagger-ui-dist两个：
+1. 根据[swagger-ui](https://github.com/swagger-api/swagger-ui/)的README.md中的说明（如下图所示），swagger-ui-dist适合单页应用开发，正符合在本模块vue3里调用swagger-ui的设想，所以安装swagger-ui-dist和@types/swagger-ui-dist两个node模块：
 
    <img src="images/swagger-ui-readme.png" alt="swagger-ui-readme" width="800"/>
+<br/>
 
    ```shell
    npm i -D swagger-ui-dist 
@@ -120,6 +128,7 @@
    ```
 
 2. 新建src/components/SwaggerUI.vue，把swagger-ui-dist/index.html转写为vue3：
+
    node_modules/swagger-ui-dist/index.html:
    ```html
    <!-- HTML for static distribution bundle build -->
@@ -212,6 +221,8 @@
 
    <img src="./images/swagger-ui-build-nochunk.png" alt="swagger-ui-build-nochunk" style="zoom: 50%;" />
 
+   <br>
+
    3. 根据上图提示，在vite.config.ts中加入chunk配置：
    ```typescript
    ...
@@ -235,6 +246,16 @@
 
    <img src="./images/swagger-ui-build-chunks.png" alt="swagger-ui-build-chunks" style="zoom: 50%;" />
 
+   <br>
+
    5. 启动OFBiz，在浏览器中访问：http://localhost:8080/openapi/v3/ ，如下图所示：
    
    <img src="./images/swagger-ui-openapi-v3.png" alt="swagger-ui-openapi-v3" style="zoom: 50%;" />
+
+   <br>
+
+   6. 至此，swagger-ui的开发环境搭建完成。
+
+<br>
+
+### vite+vue3+swagger-editor
