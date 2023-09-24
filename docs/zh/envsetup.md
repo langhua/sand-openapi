@@ -274,7 +274,7 @@
 <br/>
 
    【说明】
-   这句推荐使用swagger-editor，经过试验，不适用于vue3。所以，仍然使用
+   这句推荐使用swagger-editor，经过试验，不适用于vue3。所以，使用swagger-editor-dist。
    ```
    If you're building a single-page application, using swagger-editor is strongly recommended, since swagger-editor-dist is significantly larger.
    ```
