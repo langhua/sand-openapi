@@ -3,10 +3,13 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import commonjs from '@rollup/plugin-commonjs'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    // 注意：commonjs要放在第一个
+    commonjs() as any,
     vue(),
     vueJsx()
   ],
@@ -24,17 +27,19 @@ export default defineConfig({
       output: {
         manualChunks(id: any): string {
           if (id.includes("swagger-ui-dist")) {
-              return "swagger-ui-dist" + id.toString().split("swagger-ui-dist")[1]
+            return "swagger-ui-dist" + id.toString().split("swagger-ui-dist")[1]
+          } else if (id.includes("swagger-editor-dist")) {
+            return "swagger-editor-dist" + id.toString().split("swagger-editor-dist")[1]
           }
         }
       }
-    }
+    },
   },
   envDir: './env',
   optimizeDeps: {
     include: [
-      // '@/assets/swagger-editor-dist/swagger-editor-es-bundle.js',
-      // '@/assets/swagger-editor-dist/swagger-editor-standalone-preset.js'
+      '@/assets/swagger-editor-dist/swagger-editor-es-bundle.js',
+      '@/assets/swagger-editor-dist/swagger-editor-standalone-preset.js'
     ],
   },
 })

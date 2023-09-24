@@ -259,3 +259,242 @@
 <br>
 
 ### vite+vue3+swagger-editor
+继续在vuejs/openapi目录下，加入swagger-editor。
+
+1. 根据[swagger-editor](https://github.com/swagger-api/swagger-editor/)的README.md中的说明（如下图所示），swagger-editor-dist适合单页应用开发，正符合在本模块vue3里调用swagger-editor的设想，所以安装swagger-editor-dist这个node模块。很遗憾，没有找到@types/swagger-editor-dist模块。
+
+   <img src="images/swagger-editor-readme.png" alt="swagger-editor-readme" width="800"/>
+
+<br/>
+
+   ```shell
+   npm i -D swagger-editor-dist 
+   ```
+
+<br/>
+
+   【说明】
+   这句推荐使用swagger-editor，经过试验，不适用于vue3。所以，仍然使用
+   ```
+   If you're building a single-page application, using swagger-editor is strongly recommended, since swagger-editor-dist is significantly larger.
+   ```
+
+2. 新建src/views/SwaggerEditor.vue，把swagger-editor-dist的index.html转写为vue3：
+
+   swagger-editor-dist/index.html:
+   ```html
+   <!DOCTYPE html>
+   <!-- HTML for static distribution bundle build -->
+   <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>Swagger Editor</title>
+        <style>
+          ...
+        </style>
+        <link href="./swagger-editor.css" rel="stylesheet">
+        <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
+      </head>
+      
+      <body>
+        <div id="swagger-editor"></div>
+        <script src="./swagger-editor-bundle.js"> </script>
+        <script src="./swagger-editor-standalone-preset.js"> </script>
+        <script>
+        window.onload = function() {
+          // Build a system
+          const editor = SwaggerEditorBundle({
+            dom_id: '#swagger-editor',
+            layout: 'StandaloneLayout',
+            presets: [
+              SwaggerEditorStandalonePreset
+            ],
+            queryConfigEnabled: false,
+          })
+      
+          window.editor = editor
+        }
+        </script>
+      
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;width:0;height:0">
+          <defs>
+            ...   
+          </defs>
+        </svg>
+      
+      </body>
+   
+   </html>
+   ```
+   
+   src/components/SwaggerEditor.vue:
+   ```typescript
+   <template>
+     <div id="swagger-editor"></div>
+     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;width:0;height:0">
+       <defs>
+         ...   
+       </defs>
+     </svg>
+   </template>
+   
+   <script lang="ts">
+   import '@/assets/swagger-editor-dist/swagger-editor.css'
+   // @ts-ignore
+   import SwaggerEditorBundle from '@/assets/swagger-editor-dist/swagger-editor-es-bundle.js'
+   // @ts-ignore
+   import SwaggerEditorStandalonePreset from '@/assets/swagger-editor-dist/swagger-editor-standalone-preset.js'
+   
+   export default {
+       mounted() {
+           SwaggerEditorBundle({
+               dom_id: '#swagger-editor',
+               layout: 'StandaloneLayout',
+               presets: [
+                   SwaggerEditorStandalonePreset
+               ],
+               queryConfigEnabled: false,
+           })
+       }
+   }
+   </script>
+   
+   <style>
+     ...   
+   </style>
+   ```
+
+3. 把node_modules/swagger-editor-dist/链接为src/assets/swagger-editor-dist：
+
+   你可能注意到了SwaggerEditor.vue中，使用了
+   ```typescript
+   import '@/assets/swagger-editor-dist/swagger-editor.css'
+   // @ts-ignore
+   import SwaggerEditorBundle from '@/assets/swagger-editor-dist/swagger-editor-es-bundle.js'
+   // @ts-ignore
+   import SwaggerEditorStandalonePreset from '@/assets/swagger-editor-dist/swagger-editor-standalone-preset.js'
+   ```
+
+
+   1. Windows中，以系统管理员身份运行命令行终端：
+   ```shell
+   D:\git\sand-openapi\vuejs\openapi\src\>mkdir assets
+   D:\git\sand-openapi\vuejs\openapi\src\>cd assets
+   D:\git\sand-openapi\vuejs\openapi\src\assets>mklink /D swagger-editor-dist ..\..\node_modules\swagger-editor-dist
+   ```
+
+   2. Linux下：
+
+   ```shell
+   ~$cd ~/git/sand-openapi/vuejs/openapi/src/
+   ~/git/sand-openapi/vuejs/openapi/src$mkdir assets
+   ~/git/sand-openapi/vuejs/openapi/src/assets$ln -s ../../node_modules/swagger-editor-dist swagger-editor-dist
+   ```
+
+<br/><br/>
+
+4. 运行dev：
+   1. 修改app.vue，引入SwaggerEditor：
+
+   ```typescript
+   <script setup lang="ts">
+   // import SwaggerUI from './components/SwaggerUI.vue'
+   import SwaggerEditor from './components/SwaggerEditor.vue'
+   </script>
+
+   <template>
+      <!-- <SwaggerUI /> -->
+      <SwaggerEditor />
+   </template>
+   ```
+
+   2. 运行dev，后台出现如下错误提示，浏览器无法打开swagger-editor：
+   ```shell
+   npm run dev
+   ...
+   Sourcemap for "D:/git/sand-openapi/vuejs/openapi/src/assets/swagger-editor-dist/swagger-editor-standalone-preset.js" points to missing source files
+   ```
+   
+   3. 修改vite.config.ts，加入以下内容，令@/assets/swagger-editor-dist/swagger-editor-es-bundle.js和@/assets/swagger-editor-dist/swagger-editor-standalone-preset.js生效：
+
+   ```typescript
+     optimizeDeps: {
+       include: [
+         '@/assets/swagger-editor-dist/swagger-editor-es-bundle.js',
+         '@/assets/swagger-editor-dist/swagger-editor-standalone-preset.js'
+       ],
+     },
+   ```
+   
+   4. 浏览器正确打开swagger-editor，如下图所示：
+   
+   <img src="images/swagger-editor-localhost.png" width="800" alt="swagger-editor-localhost" />
+
+<br/><br/>   
+
+6. 编译到webapp/openapi/v3目录下：
+   1. 编译(npm run build)时报错，如下图所示：
+   
+   <img src="images/swagger-editor-build-error.png" width="800" alt="swagger-editor-build-error" />
+<br/><br/>
+   
+   2. 安装@rollup/plugin-commonjs：
+   ```shell
+   npm i -D @rollup/plugin-commonjs
+   ```
+   
+   3. 修改vite.config.ts，加入以下内容，令@rollup/plugin-commonjs生效，完整文件如下：
+   ```typescript
+   import { fileURLToPath, URL } from 'node:url'
+   
+   import { defineConfig } from 'vite'
+   import vue from '@vitejs/plugin-vue'
+   import vueJsx from '@vitejs/plugin-vue-jsx'
+   import commonjs from '@rollup/plugin-commonjs'
+
+   // https://vitejs.dev/config/
+   export default defineConfig({
+     plugins: [
+       // 注意：commonjs要放在第一个
+       commonjs() as any,
+       vue(),
+       vueJsx()
+     ],
+     resolve: {
+       alias: {
+         '@': fileURLToPath(new URL('./src', import.meta.url))
+       },
+       preserveSymlinks: true
+     },
+     base: './',
+     build: {
+       outDir: '../../webapp/openapi/v3',
+       chunkSizeWarningLimit: 1500, // 文件大小超过1500kb时显示警告提示
+       rollupOptions: {
+         output: {
+           manualChunks(id: any): string {
+             if (id.includes("swagger-ui-dist")) {
+               return "swagger-ui-dist" + id.toString().split("swagger-ui-dist")[1]
+             } else if (id.includes("swagger-editor-dist")) {
+               return "swagger-editor-dist" + id.toString().split("swagger-editor-dist")[1]
+             }
+           }
+         }
+       },
+     },
+     envDir: './env',
+     optimizeDeps: {
+       include: [
+         '@/assets/swagger-editor-dist/swagger-editor-es-bundle.js',
+         '@/assets/swagger-editor-dist/swagger-editor-standalone-preset.js'
+       ],
+     },
+   })
+   ```
+
+   4. 再次运行编译(npm run build)，成功，访问http://localhost:8080/openapi/v3/index.html，页面正确。
+
+<br/><br/>
+
+=== 本节结束 ===
