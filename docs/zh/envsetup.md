@@ -493,7 +493,7 @@
    })
    ```
 
-   4. 再次运行编译(npm run build)，成功，访问http://localhost:8080/openapi/v3/index.html，页面正确。
+   4. 再次运行编译(npm run build)，成功，访问[http://localhost:8080/openapi/v3/index.html](http://localhost:8080/openapi/v3/index.html)，页面正确。
 
 <br/><br/>
 
