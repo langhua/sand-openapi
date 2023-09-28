@@ -437,7 +437,7 @@
    1. 编译(npm run build)时报错，如下图所示：
    
    <img src="images/swagger-editor-build-error.png" width="800" alt="swagger-editor-build-error" />
-<br/><br/>
+   <br/><br/>
    
    2. 安装@rollup/plugin-commonjs：
    ```shell
