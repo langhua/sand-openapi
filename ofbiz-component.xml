@@ -33,6 +33,15 @@ under the License.
         mount-point="/openapi"
         base-permission="OFBTOOLS"
         menu-name="secondary"
-        app-bar-display="false" />
+        app-bar-display="true" />
+
+    <webapp name="sanddav"
+            title="Sand Openapi Webdav Implementation"
+            server="default-server"
+            location="webapp/sanddav"
+            mount-point="/sanddav"
+            base-permission="OFBTOOLS"
+            menu-name="secondary"
+            app-bar-display="true" />
 
 </ofbiz-component>

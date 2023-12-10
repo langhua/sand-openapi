@@ -49,7 +49,7 @@ export default {
             url: 'https://petstore.swagger.io/v2/swagger.yaml',
             dom_id: '#swagger-editor',
             // 如果注释掉layout，则不显示页眉的菜单栏
-            layout: 'StandaloneLayout',
+            // layout: 'StandaloneLayout',
             presets: [
                 SwaggerEditorStandalonePreset
             ],
