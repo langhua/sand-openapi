@@ -1,14 +1,72 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import router from '@/router';
+  import { ref, watch } from 'vue';
+
+  const props = defineProps({
+    fileUri: String
+  })
+
   const activeIndex = ref('8')
-  const handleFileClick = ($parent: any) => {
-    $parent.openFileDrawer()
-  }
   const cancelSelection = () => {
     activeIndex.value = activeIndex.value == '8' ? '9' : '8'
   }
+
+  const menuEditDisabled = ref<boolean>(true)
+  const menuItemDisabled = ref<boolean>(true)
+  console.log("menu init: router: " + router.currentRoute.value.fullPath)
+
+  if (router.currentRoute.value.query.fileUri != undefined) {
+    menuItemDisabled.value = false
+    if (router.currentRoute.value.name == 'editor') {
+      menuEditDisabled.value = true
+    } else {
+      menuEditDisabled.value = false
+    }
+  }
+  console.log("menu init: menuEditDisabled: " + menuEditDisabled.value)
+
+  const handleFileClick = ($parent: any) => {
+    $parent.openFileDrawer()
+  }
+
+  const gotoEditor = () => {
+    console.log("gotoEditor: " + router.currentRoute.value.query.fileUri)
+    console.log("gotoEditor: props.fileUri: " + props.fileUri)
+    console.log("gotoEditor: window.location: " + window.location.href)
+    if (props.fileUri != undefined) {
+      router.push({path: '/editor', query: {fileUri: props.fileUri}})
+    } else {
+      router.push({path: '/editor', query: {fileUri: router.currentRoute.value.query.fileUri}})
+    }
+  }
+
+  const gotoView = () => {
+    console.log("gotoView: " + router.currentRoute.value.query.fileUri)
+    console.log("gotoView: props.fileUri: " + props.fileUri)
+    console.log("gotoView: window.location: " + window.location.href)
+    if (props.fileUri != undefined) {
+      router.push({path: '/viewfile', query: {fileUri: props.fileUri}})
+    } else {
+      router.push({path: '/viewfile', query: {fileUri: router.currentRoute.value.query.fileUri}})
+    }
+  }
+
+  watch(props, () => {
+    if (props.fileUri != '') {
+      menuItemDisabled.value = false
+      if (router.currentRoute.value.name == 'editor') {
+        menuEditDisabled.value = true
+      } else {
+        menuEditDisabled.value = false
+      }
+    } else {
+      menuEditDisabled.value = true
+      menuItemDisabled.value = true
+    }
+  })
+
   defineExpose ({
-    cancelSelection
+    cancelSelection,
   })
 </script>
 
@@ -21,20 +79,10 @@
     active-text-color="#ffd04b"
   >
     <el-menu-item index="1" @click="handleFileClick($parent)">File</el-menu-item>
-    <el-sub-menu index="2">
-      <template #title>Edit</template>
-      <el-menu-item index="2-1">item one</el-menu-item>
-      <el-menu-item index="2-2">item two</el-menu-item>
-      <el-menu-item index="2-3">item three</el-menu-item>
-      <el-sub-menu index="2-4">
-      <template #title>item four</template>
-      <el-menu-item index="2-4-1">item one</el-menu-item>
-      <el-menu-item index="2-4-2">item two</el-menu-item>
-      <el-menu-item index="2-4-3">item three</el-menu-item>
-      </el-sub-menu>
-    </el-sub-menu>
-    <el-menu-item index="3">Generate Server</el-menu-item>
-    <el-menu-item index="4">Generate Client</el-menu-item>
+    <el-menu-item v-if="router.currentRoute.value.name != 'editor'" index="2" @click="gotoEditor" :disabled="menuEditDisabled">Edit</el-menu-item>
+    <el-menu-item v-else index="2" :disabled="menuItemDisabled" @click="gotoView">View</el-menu-item>
+    <el-menu-item index="3" :disabled="menuItemDisabled">Generate Server</el-menu-item>
+    <el-menu-item index="4" :disabled="menuItemDisabled">Generate Client</el-menu-item>
     <el-menu-item index="5">About</el-menu-item>
   </el-menu>
 </template>
@@ -42,5 +90,9 @@
 <style scoped>
 .el-menu--horizontal {
   height: 50px;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  width: 100%;
 }
 </style>

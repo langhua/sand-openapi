@@ -42,4 +42,12 @@ export default defineConfig({
       '@/assets/swagger-editor-dist/swagger-editor-standalone-preset.js'
     ],
   },
+  server: {
+    proxy: {
+      '/sanddav': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+      },
+    }
+  }
 })

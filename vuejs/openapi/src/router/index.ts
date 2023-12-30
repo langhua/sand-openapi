@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import FileTree from '@/views/FileTree.vue'
-// import ServiceDetails from '@/views/ServiceDetails.vue'
+import Home from '@/views/Home.vue'
+import Login from '@/views/Login.vue'
+import Editor from '@/views/Editor.vue'
 const env = import.meta.env
 
 const router = createRouter({
@@ -8,14 +9,24 @@ const router = createRouter({
   routes: [
     {
       path: env.VITE_OPENAPI_BASE_URL,
-      name: 'fileTree',
-      component: FileTree
+      name: 'home',
+      component: Home
     },
-    // {
-    //   path: env.VITE_MDNS_BASE_URL + 'details/:type/:base64Name',
-    //   name: 'details',
-    //   component: ServiceDetails
-    // }
+    {
+      path: env.VITE_OPENAPI_BASE_URL + 'viewfile',
+      name: 'viewfile',
+      component: Home
+    },
+    {
+      path: env.VITE_OPENAPI_BASE_URL + 'login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: env.VITE_OPENAPI_BASE_URL + 'editor',
+      name: 'editor',
+      component: Editor
+    }
   ]
 })
 

@@ -1,62 +1,11 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
-  // import SwaggerUI from '@/components/SwaggerUI.vue'
-  import SwaggerEditor from '@/components/SwaggerEditor.vue'
-  import EditorMenu from '@/components/EditorMenu.vue'
-  import FileTree from '@/views/FileTree.vue'
-
-  const direction = ref('ltr')
-  const fileDrawer = ref(false)
-  const editorMenuRef = ref()
-  const closeFileDrawer = () => {
-    if (editorMenuRef != null && editorMenuRef.value != null) {
-      editorMenuRef.value.cancelSelection()
-    }
-    fileDrawer.value = false
-  }
-  const openFileDrawer = () => {
-    if (fileDrawer != null && fileDrawer.value != null) {
-      fileDrawer.value = true
-    }
-  }
-
-  const openDrawer = () => {
-    console.log("--1--")
-  }
-
-  defineExpose ({
-    openFileDrawer
-  })
 </script>
 
 <template>
-  <!-- <SwaggerUI /> -->
-  <EditorMenu ref="editorMenuRef"/>
-  <SwaggerEditor/>
-
-  <div>
-    <el-drawer
-      v-model="fileDrawer"
-      title="Openapi Files"
-      :direction="direction"
-      :before-close="closeFileDrawer"
-      style="top: 50px; height: auto;"
-      size="50%"
-      :show-close="false"
-      @open="openDrawer"
-    >
-      <template #default>
-        <Suspense>
-          <FileTree />
-        </Suspense>
-      </template>
-    </el-drawer>
-  </div>
+  <Suspense>
+    <RouterView :key="Date()"/>
+    <template #fallback>
+      Loading...
+    </template>
+  </Suspense>
 </template>
-
-<style scoped>
-:deep(.el-drawer__header) {
-  margin-bottom: 0px;
-  border-bottom: 1px solid darksalmon;
-}
-</style>

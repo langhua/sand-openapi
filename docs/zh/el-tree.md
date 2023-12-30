@@ -310,3 +310,5 @@ const handleNodeClick = (data: FileTree) => {
 
 ### 参考资料
 1. [element-plus树形控件](https://element-plus.org/zh-CN/component/tree.html)
+2. [el-tree树组件的懒加载写法步骤](https://juejin.cn/post/7013675152432955400)
+3. [el-tree 懒加载load 手动触发load更新的三种方法](https://www.jianshu.com/p/0e1d4d28104e)

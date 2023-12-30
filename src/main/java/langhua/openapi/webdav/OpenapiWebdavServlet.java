@@ -42,6 +42,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.Serial;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
@@ -51,6 +52,7 @@ import java.util.function.Function;
 
 public class OpenapiWebdavServlet extends WebdavServlet {
     private static final String MODULE = OpenapiWebdavServlet.class.getName();
+    @Serial
     private static final long serialVersionUID = 1L;
     private static Delegator delegator;
     private static LocalDispatcher dispatcher;
@@ -114,6 +116,7 @@ public class OpenapiWebdavServlet extends WebdavServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", "*");
+        resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         resp.setHeader(HttpHeaders.SET_COOKIE, "");
         super.service(req, resp);
     }
@@ -135,11 +138,8 @@ public class OpenapiWebdavServlet extends WebdavServlet {
      *
      * @return the Json data
      *
-     * @throws IOException an IO error occurred
      */
-    protected InputStream renderJsonTree(String contextPath, WebResource resource)
-            throws IOException {
-
+    protected InputStream renderJsonTree(String contextPath, WebResource resource) {
         // Prepare a writer to a buffered area
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         OutputStreamWriter osWriter = new OutputStreamWriter(stream, StandardCharsets.UTF_8);
@@ -152,15 +152,20 @@ public class OpenapiWebdavServlet extends WebdavServlet {
         jsonSortManager.sort(entries);
 
         // rewriteUrl(contextPath) is expensive. cache result for later reuse
-        String rewrittenContextPath = rewriteUrl(contextPath);
+        String rewrittenContextPath = rewriteUrl(directoryWebappPath);
 
         // Render the page header
         sb.append("{");
         sb.append("\"resources\":[");
-        sb.append("{\"name\":\"/\", \"type\":\"Dir\", \"path\":\"");
-        sb.append(rewrittenContextPath);
-        sb.append("\",\"resources\":[");
-        ouputResources(sb, entries, rewrittenContextPath);
+        sb.append("{\"name\":\"" + directoryWebappPath + "\", \"type\":\"Dir\", \"path\":\"");
+        sb.append(contextPath + rewrittenContextPath);
+        if (entries.length > 0) {
+            sb.append("\",\"isLeaf\":\"false\"");
+        } else {
+            sb.append("\",\"isLeaf\":\"true\"");
+        }
+        sb.append(",\"resources\":[");
+        ouputResources(sb, entries, contextPath);
         sb.append("]}]}");
 
         // Return an input stream to the underlying bytes
@@ -169,7 +174,7 @@ public class OpenapiWebdavServlet extends WebdavServlet {
         return new ByteArrayInputStream(stream.toByteArray());
     }
 
-    private void ouputResources(StringBuilder sb, WebResource[] entries, String rewrittenContextPath) {
+    private void ouputResources(StringBuilder sb, WebResource[] entries, String contextPath) {
         boolean isFirst = true;
         for (WebResource childResource : entries) {
             String filename = childResource.getName();
@@ -197,21 +202,18 @@ public class OpenapiWebdavServlet extends WebdavServlet {
                 sb.append("File");
             }
             sb.append("\",\"path\":\"");
-            sb.append(rewrittenContextPath);
+            sb.append(contextPath);
             sb.append(rewriteUrl(childResource.getWebappPath()));
             if (childResource.isDirectory()) {
                 sb.append("/");
                 WebResource[] subEntries = resources.listResources(childResource.getWebappPath());
                 if (subEntries != null && subEntries.length > 0) {
-                    jsonSortManager.sort(subEntries);
-                    sb.append("\",\"resources\":[");
-                    ouputResources(sb, subEntries, rewrittenContextPath);
-                    sb.append("]");
+                    sb.append("\",\"isLeaf\":\"false\"");
                 } else {
-                    sb.append("\"");
+                    sb.append("\",\"isLeaf\":\"true\"");
                 }
             } else {
-                sb.append("\"");
+                sb.append("\",\"isLeaf\":\"true\"");
             }
             sb.append("}");
         }

@@ -36,26 +36,52 @@
 </template>
 
 <script lang="ts">
+import { ref, watch } from 'vue'
+const uri = ref<string>('')
+
 import '@/assets/swagger-editor-dist/swagger-editor.css'
 // @ts-ignore
 import SwaggerEditorBundle from '@/assets/swagger-editor-dist/swagger-editor-es-bundle.js'
 // @ts-ignore
 import SwaggerEditorStandalonePreset from '@/assets/swagger-editor-dist/swagger-editor-standalone-preset.js'
 
+const editor = ref<SwaggerEditorBundle>(null)
+
+const showSwaggerEditor = () => {
+  if (editor.value != null) {
+    editor.value.jsonSchemaValidatorActions.terminateWorker()
+  }
+
+  editor.value = SwaggerEditorBundle({
+      // 或者使用json样例文件: https://petstore.swagger.io/v2/swagger.json
+      url: uri.value,
+      dom_id: '#swagger-editor',
+      // 如果注释掉layout，则不显示页眉的菜单栏
+      // layout: 'StandaloneLayout',
+      presets: [
+          SwaggerEditorStandalonePreset
+      ],
+      queryConfigEnabled: false,
+  })
+}
+
 export default {
-    mounted() {
-        SwaggerEditorBundle({
-            // 或者使用json样例文件: https://petstore.swagger.io/v2/swagger.json
-            url: 'https://petstore.swagger.io/v2/swagger.yaml',
-            dom_id: '#swagger-editor',
-            // 如果注释掉layout，则不显示页眉的菜单栏
-            // layout: 'StandaloneLayout',
-            presets: [
-                SwaggerEditorStandalonePreset
-            ],
-            queryConfigEnabled: false,
-        })
+  props: {
+    fileUri: String
+  },
+  setup(props) {
+    if (props.fileUri != undefined && props.fileUri != '') {
+      uri.value = props.fileUri
     }
+
+    watch(props, () => {
+      uri.value = props.fileUri == undefined? '' : props.fileUri
+      showSwaggerEditor()
+    })
+  },
+  mounted() {
+    showSwaggerEditor()
+  }
 }
 </script>
 

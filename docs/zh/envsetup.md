@@ -497,4 +497,7 @@
 
 <br/><br/>
 
+### 参考资料
+1. [Error when running SwaggerEditorBundle function the second time](https://github.com/swagger-api/swagger-editor/issues/2339)
+
 === 本节结束 ===
