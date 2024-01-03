@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/views/Home.vue'
-import Login from '@/views/Login.vue'
-import Editor from '@/views/Editor.vue'
+import Home from '@/views/HomeView.vue'
+import Login from '@/views/LoginView.vue'
+import Editor from '@/views/EditorView.vue'
 const env = import.meta.env
 
 const router = createRouter({

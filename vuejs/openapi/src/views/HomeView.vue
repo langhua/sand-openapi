@@ -16,7 +16,7 @@
   const editorMenuRef = ref()
 
   const closeFileDrawer = (path: string) => {
-    if (editorMenuRef != null && editorMenuRef.value != null) {
+    if (editorMenuRef.value != null) {
       editorMenuRef.value.cancelSelection()
     }
     fileDrawer.value = false
@@ -26,7 +26,7 @@
   }
 
   const openFileDrawer = () => {
-    if (fileDrawer != null && fileDrawer.value != null) {
+    if (fileDrawer.value != null) {
       fileDrawer.value = true
     }
   }

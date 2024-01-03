@@ -9,7 +9,7 @@ import commonjs from '@rollup/plugin-commonjs'
 export default defineConfig({
   plugins: [
     // 注意：commonjs要放在第一个
-    commonjs() as any,
+    commonjs(),
     vue(),
     vueJsx()
   ],
@@ -25,7 +25,7 @@ export default defineConfig({
     chunkSizeWarningLimit: 1500, // 文件大小超过1500kb时显示警告提示
     rollupOptions: {
       output: {
-        manualChunks(id: any): string {
+        manualChunks(id: string | string[]): string {
           if (id.includes("swagger-ui-dist")) {
             return "swagger-ui-dist" + id.toString().split("swagger-ui-dist")[1]
           } else if (id.includes("swagger-editor-dist")) {

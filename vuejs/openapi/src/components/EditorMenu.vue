@@ -13,7 +13,6 @@
 
   const menuEditDisabled = ref<boolean>(true)
   const menuItemDisabled = ref<boolean>(true)
-  console.log("menu init: router: " + router.currentRoute.value.fullPath)
 
   if (router.currentRoute.value.query.fileUri != undefined) {
     menuItemDisabled.value = false
@@ -23,16 +22,12 @@
       menuEditDisabled.value = false
     }
   }
-  console.log("menu init: menuEditDisabled: " + menuEditDisabled.value)
 
   const handleFileClick = ($parent: any) => {
     $parent.openFileDrawer()
   }
 
   const gotoEditor = () => {
-    console.log("gotoEditor: " + router.currentRoute.value.query.fileUri)
-    console.log("gotoEditor: props.fileUri: " + props.fileUri)
-    console.log("gotoEditor: window.location: " + window.location.href)
     if (props.fileUri != undefined) {
       router.push({path: '/editor', query: {fileUri: props.fileUri}})
     } else {
@@ -41,9 +36,6 @@
   }
 
   const gotoView = () => {
-    console.log("gotoView: " + router.currentRoute.value.query.fileUri)
-    console.log("gotoView: props.fileUri: " + props.fileUri)
-    console.log("gotoView: window.location: " + window.location.href)
     if (props.fileUri != undefined) {
       router.push({path: '/viewfile', query: {fileUri: props.fileUri}})
     } else {
