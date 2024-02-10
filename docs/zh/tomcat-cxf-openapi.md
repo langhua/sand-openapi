@@ -19,11 +19,11 @@
    "url": "/petstore/app",
    ```
 
-6. 重启Tomcat，访问http://localhost:8080/petstore/app/openapi.json，可以看到openapi文档，如下图所示：
+6. 重启Tomcat，访问[http://localhost:8080/petstore/app/openapi.json](http://localhost:8080/petstore/app/openapi.json)，可以看到openapi文档，如下图所示：
 
    <img src="images/tomcat-cxf-openapi.png" width="800" alt="tomcat-cxf-openapi" />
  
-7. 根据上一步得到的openapi文档，访问http://localhost:8080/petstore/app/sample，可以看到返回的json数据
+7. 根据上一步得到的openapi文档，访问[http://localhost:8080/petstore/app/sample](http://localhost:8080/petstore/app/sample)，可以看到返回的json数据
 8. 经尝试，WEB-INF/lib/下，与openapi无关的jar可以删除，如glassfish-corba*.jar、pfl-*.jar、geronimo-*.jar等
 
 <br>
@@ -141,7 +141,7 @@
    ```
       
 7. 启动vite-vue3
-8. 在浏览器中，访问http://localhost:5173/viewfile?fileUri=/petstore/app/openapi.yaml，如下图所示：
+8. 在浏览器中，访问[http://localhost:5173/viewfile?fileUri=/petstore/app/openapi.yaml](http://localhost:5173/viewfile?fileUri=/petstore/app/openapi.yaml)，如下图所示：
 
    <img src="images/swagger-ui-cxf-openapi-v3-sample.png" width="800" alt="swagger-ui-cxf-openapi-v3-sample" />
 
