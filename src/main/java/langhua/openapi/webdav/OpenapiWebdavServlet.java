@@ -117,6 +117,7 @@ public class OpenapiWebdavServlet extends WebdavServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", "*");
         resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        resp.setHeader("Cache-Control", "no-store");
         resp.setHeader(HttpHeaders.SET_COOKIE, "");
         super.service(req, resp);
     }

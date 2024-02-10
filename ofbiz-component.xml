@@ -44,4 +44,13 @@ under the License.
             menu-name="secondary"
             app-bar-display="true" />
 
+    <webapp name="petstore"
+            title="Swagger Petstore Sample"
+            server="default-server"
+            location="webapp/petstore"
+            mount-point="/petstore"
+            base-permission="OFBTOOLS"
+            menu-name="secondary"
+            app-bar-display="true" />
+
 </ofbiz-component>

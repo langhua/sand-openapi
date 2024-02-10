@@ -19,7 +19,9 @@
 plugins.apply("com.github.node-gradle.node")
 
 dependencies {
-    pluginLibsCompile 'org.apache.commons:commons-vfs2-jackrabbit1:2.9.0'
+    pluginLibsCompile 'org.apache.commons:commons-vfs2-jackrabbit1:2.9.0',
+            'jakarta.xml.ws:jakarta.xml.ws-api:2.3.3',
+            'org.apache.cxf:cxf-rt-rs-service-description-openapi-v3:3.5.7'
 }
 
 task openapiDist(type: NpmTask) {

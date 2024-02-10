@@ -224,6 +224,7 @@
    <br>
 
    3. 根据上图提示，在vite.config.ts中加入chunk配置：
+   说明：加入chunk配置后，编译后的单个文件大小会变小，但是文件数量会变多，这有利于提升网页加载速度。
    ```typescript
    ...
    build: {
@@ -499,5 +500,7 @@
 
 ### 参考资料
 1. [Error when running SwaggerEditorBundle function the second time](https://github.com/swagger-api/swagger-editor/issues/2339)
+
+<br/><br/>
 
 === 本节结束 ===

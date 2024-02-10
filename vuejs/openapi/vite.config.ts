@@ -45,8 +45,25 @@ export default defineConfig({
   server: {
     proxy: {
       '/sanddav': {
-        target: 'http://localhost:8080',
+        target: 'https://localhost:8443',
         changeOrigin: true,
+        secure: false,
+      },
+      '/openapi/control': {
+        target: 'https://localhost:8443',
+        changeOrigin: true,
+        secure: false,
+        followRedirects: true,
+      },
+      '/petstore/app': {
+        target: 'https://localhost:8443',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/sample': {
+        target: 'https://localhost:8443/petstore/app',
+        changeOrigin: true,
+        secure: false,
       },
     }
   }

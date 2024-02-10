@@ -50,7 +50,7 @@ const fileTreeProps = {
     }
 }
 
-const handleNodeClick = (data: FileTree) => {
+const handleNodeClick = () => {
 }
 
 const refreshFolder = (node: Node) => {

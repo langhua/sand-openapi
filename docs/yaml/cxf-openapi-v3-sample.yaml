@@ -1,0 +1,130 @@
+openapi: 3.0.1
+servers:
+  - url: /petstore/app
+info:
+  title: Apache CXF OpenAPI 3.0 Sample
+  version: 3.5.7
+paths:
+  /sample:
+    get:
+      summary: Get all items
+      description: Get operation with Response and @Default value
+      operationId: getItems
+      parameters:
+        - name: page
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 1
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+    post:
+      summary: Create new item
+      description: Post operation with entity in a body
+      operationId: createItem
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+        required: true
+      responses:
+        "201":
+          description: success
+          headers:
+            Location:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+  /sample/{name}:
+    get:
+      summary: Get item by name
+      description: Get operation with type and headers
+      operationId: getItem
+      parameters:
+        - name: Accept-Language
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+    put:
+      summary: Update an existing new item
+      description: Put operation with form parameter
+      operationId: updateItem
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              required:
+                - value
+              type: object
+              properties:
+                value:
+                  type: string
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+    delete:
+      summary: Delete an existing new item
+      description: Delete operation with implicit header
+      operationId: delete
+      parameters:
+        - name: Accept-Language
+          in: header
+          description: language
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+components:
+  schemas:
+    Item:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
