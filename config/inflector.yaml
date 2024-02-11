@@ -1,6 +1,6 @@
 controllerPackage: io.swagger.petstore.controller
 modelPackage:  io.swagger.petstore.model
-swaggerUrl: openapi.yaml
+swaggerUrl: petstore-openapi-v3.yaml
 
 exposedSpecOptions:
   useOriginalNotParsed: true
@@ -13,4 +13,4 @@ entityProcessors:
 swaggerProcessors:
 - io.swagger.petstore.utils.HandleAuthUrlProcessor
 
-rootPath: /api
+rootPath: /petstore/api

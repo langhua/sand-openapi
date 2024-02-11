@@ -21,7 +21,9 @@ plugins.apply("com.github.node-gradle.node")
 dependencies {
     pluginLibsCompile 'org.apache.commons:commons-vfs2-jackrabbit1:2.9.0',
             'jakarta.xml.ws:jakarta.xml.ws-api:2.3.3',
-            'org.apache.cxf:cxf-rt-rs-service-description-openapi-v3:3.5.7'
+            'org.apache.cxf:cxf-rt-rs-service-description-openapi-v3:3.5.7',
+            'io.swagger.core.v3:swagger-jaxrs2-servlet-initializer:2.2.6',
+            'io.swagger:swagger-inflector:2.0.5'
 }
 
 task openapiDist(type: NpmTask) {

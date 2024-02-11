@@ -37,7 +37,7 @@
    ```
 
 2. 在sand-openapi/src/main/中，添加demo/jaxrs/openapi/server目录，在其中添加[Item.java](https://github.com/apache/cxf/tree/cxf-3.5.7/distribution/src/main/release/samples/jax_rs/description_openapi_v3_web/src/main/java/demo/jaxrs/openapi/server/Item.java)和[Sample.java](https://github.com/apache/cxf/blob/cxf-3.5.7/distribution/src/main/release/samples/jax_rs/description_openapi_v3_web/src/main/java/demo/jaxrs/openapi/server/Sample.java)。
-3. 在sand-openapi/config/中，添加openapi-configuration-demo.json文件，内容如下：
+3. 在sand-openapi/config/中，添加cxf-openapi-v3-sample.json文件，内容如下：
    ```json
    {
        "resourcePackages": [
@@ -92,7 +92,7 @@
            </init-param>
            <init-param>
                <param-name>jaxrs.features</param-name>
-               <param-value>org.apache.cxf.jaxrs.openapi.OpenApiFeature(openapi-configuration-demo.json)</param-value>
+               <param-value>org.apache.cxf.jaxrs.openapi.OpenApiFeature(cxf-openapi-v3-sample.json)</param-value>
            </init-param>
            <init-param>
                <param-name>jaxrs.providers</param-name>

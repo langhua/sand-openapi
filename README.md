@@ -21,7 +21,8 @@
 1. [sand-openapi开发环境搭建笔记](./docs/zh/envsetup.md)
 2. [前端：基于vue3 elment-plus的openapi文档编写环境搭建笔记](./docs/zh/openapi-elementplus-dev.md)
 3. [运行apache cxf jax_rs_description_openapi_v3_web样例](./docs/zh/tomcat-cxf-openapi.md)
-4. [认证](./docs/zh/auth.md)
+4. [运行swagger-petstore样例](./docs/zh/swagger-petstore.md)
+5. [认证](./docs/zh/auth.md)
 
 ### 参考资料
 1. [Intellij VFS说明](https://plugins.jetbrains.com/docs/intellij/virtual-file-system.html)
