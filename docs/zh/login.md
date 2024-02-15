@@ -75,17 +75,6 @@ $(function(){
 
 <br/>
 
-### 支持四种认证模式
-[OpenAPI支持五种认证模式](https://swagger.io/docs/specification/authentication/)，本模块实现和测试了其中的四种，具体如下：
-
-1. Cookie认证
-
-2. Http基本认证
-
-3. Http Bearer认证
-
-4. OAuth 2.0认证
-
 
 ### 参考资料
 1. [vue 3 项目实战一（绘制登录界面）](https://blog.csdn.net/qq_41045128/article/details/125651144)
