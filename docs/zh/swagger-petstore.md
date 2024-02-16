@@ -79,7 +79,12 @@
    }
    ```
 
-8. 启动vite-vue3
+8. 进入vuejs/openapi/目录，启动vite-vue3：
+   ```bash
+   cd vuejs/openapi/
+   npm run dev  
+   ```
+
 9. 在浏览器中，访问[http://localhost:5173/viewfile?fileUri=/petstore/api/v3/openapi.yaml](http://localhost:5173/viewfile?fileUri=/petstore/api/v3/openapi.yaml)，如下图所示：
 
    <img src="images/sand-openapi-swagger-petstore.png" width="800" alt="sand-openapi-swagger-petstore" />

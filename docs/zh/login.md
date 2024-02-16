@@ -1,5 +1,11 @@
 # 登录
 
+登录功能，是为了用户访问sanddav文件管理功能而设计的。实现上分前端和后端两部分。
+
+## 前端实现笔记
+
+前端实现使用Vue.js框架，使用Vue.js的router功能实现页面跳转，使用Vue.js的axios功能实现与后端的交互。
+
 ### 选择登录页面
 
 受[vue 3 项目实战一（绘制登录界面）](https://blog.csdn.net/qq_41045128/article/details/125651144)这篇文章的启发，在codepen.io上搜索login，挑选了[Melanie E Magdalena设计的登录页面Dynamic Single Page Login + Sign Up](https://codepen.io/m2creates/pen/EEvGgW)。
@@ -8,7 +14,7 @@
 
 <img src="images/export-login-design-from-codepen.png" width="500" alt="export-login-design-from-codepen">
 
-将下载的zip文件解压缩后，在dist目录下有3个文件：index.html、script.js、style.css。浏览三个文件的内容，发现index.html是整个页面的html代码，script.js是通用的javascript文件，style.css是标准的css样式文件。
+将下载的zip文件解压缩后，在dist目录下有3个文件：index.html、script.js、style.css。浏览三个文件的内容，发现index.html是单页html代码，script.js是通用的javascript文件，style.css是标准的css样式文件。
 
 <br/>
 
@@ -74,6 +80,9 @@ $(function(){
 详见[基于el-form表单实现登录表单](el-form.md)
 
 <br/>
+
+## 后端实现笔记
+
 
 
 ### 参考资料
