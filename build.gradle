@@ -18,18 +18,22 @@
  */
 plugins.apply("com.github.node-gradle.node")
 
+configurations.all {
+    exclude group:'ch.qos.logback'
+}
+
 dependencies {
     pluginLibsCompile 'org.apache.commons:commons-vfs2-jackrabbit1:2.9.0',
             'jakarta.xml.ws:jakarta.xml.ws-api:2.3.3',
+            'io.swagger:swagger-inflector:2.0.5',
             'org.apache.cxf:cxf-rt-rs-service-description-openapi-v3:3.5.7',
-            'io.swagger.core.v3:swagger-jaxrs2-servlet-initializer:2.2.6',
-            'io.swagger:swagger-inflector:2.0.5'
+            'io.swagger.core.v3:swagger-jaxrs2-servlet-initializer:2.2.6'
 }
 
 task openapiDist(type: NpmTask) {
     args = ['run', 'build', '--emptyOutDir']
     // on workingDir, see https://github.com/node-gradle/gradle-node-plugin/blob/master/docs/faq.md
-    String workingDirPath = rootProject.pluginsDir + '/sand-openapi/vuejs/openapi'
+    def workingDirPath = rootProject.pluginsDir + '/sand-openapi/vuejs/openapi'
     if (rootProject.os.contains('windows')) {
         workingDirPath = workingDirPath.replaceAll('\\\\', '/')
     }

@@ -24,7 +24,6 @@ Map serviceCtx = [
         "login.password": request.getParameter("password"),
         "request": request
 ]
-Debug.logInfo("--0--" + request.getParameter("username"), "cookieAuthn.groovy")
 
 Map serviceResult = dispatcher.runSync("userLogin", serviceCtx)
 

@@ -29,7 +29,7 @@ const cookieAuthnForm = reactive({
 const cookieAuthnRules = reactive<FormRules<typeof cookieAuthnForm>>({
   username: [
     { required: true, message: 'Please input username', trigger: 'blur' },
-    { min: 1, max: 80, message: 'Length should be 4 to 80', trigger: 'blur' },
+    { min: 1, max: 80, message: 'Length should be 1 to 80', trigger: 'blur' },
   ],
   password: [
     { required: true, message: 'Please input password', trigger: 'blur' },

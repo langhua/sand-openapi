@@ -44,12 +44,12 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/sanddav': {
+      '/sanddav/': {
         target: 'https://localhost:8443',
         changeOrigin: true,
         secure: false,
       },
-      '/openapi/control': {
+      '/openapi/control/': {
         target: 'https://localhost:8443',
         changeOrigin: true,
         secure: false,
@@ -60,12 +60,17 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
-      '/sample': {
+      '/sample/': {
         target: 'https://localhost:8443/petstore/app',
         changeOrigin: true,
         secure: false,
       },
-      '/petstore/api': {
+      '/petstore/api/': {
+        target: 'https://localhost:8443',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/oauth/': {
         target: 'https://localhost:8443',
         changeOrigin: true,
         secure: false,

@@ -63,17 +63,15 @@ components:
 
 <br/>
 
-至此，完成petstore_auth的oauth2认证，接口。
+至此，完成petstore_auth的oauth2认证。
 
-然而，我们发现，无论认证与否，接口都可以返回数据，因此，需要对后端接口进行改进。
+**【注意】** swagger-petstore的后端接口，仅用于演示目的，没有使用OAuth2认证和鉴权，不能直接用于实际项目。
 
-<br/>
+<br>
 
-### 后端使用OAuth2认证
+### 通过OFBiz-CAS模块，完整实现OAuth2认证和鉴权
 
-后端接口，需要使用OAuth2认证，才能保证接口的安全性。
-
-
+使用OFBiz-CAS模块，完整实现swagger-petstore，参见[支持Swagger OAuth2认证流程](https://github.com/langhua/OFBiz-CAS/blob/ofbiz-22.01-cas-5.3.15.1-r1/docs/cas-5.3.15.1-swagger-oauth-zh.md)
 
 <br/>
 
