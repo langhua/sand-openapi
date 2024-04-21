@@ -21,7 +21,19 @@
          xmlns="http://java.sun.com/xml/ns/javaee" version="3.0"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-    <display-name>CXF OpenAPI v3.0 Sample</display-name>
+    <display-name>CXF OpenAPI v3.0 Sample/Swagger PetStore</display-name>
+
+    <context-param>
+        <description>A unique name used to identify/recognize the local dispatcher for the Service Engine</description>
+        <param-name>localDispatcherName</param-name>
+        <param-value>petstore</param-value>
+    </context-param>
+    <context-param>
+        <description>The Name of the Entity Delegator to use, defined in entityengine.xml</description>
+        <param-name>entityDelegatorName</param-name>
+        <param-value>default</param-value>
+    </context-param>
+
     <servlet>
         <display-name>CXF Servlet</display-name>
         <servlet-name>CXFServlet</servlet-name>
@@ -69,12 +81,34 @@
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <description>Main Control Servlet</description>
+        <display-name>ControlServlet</display-name>
+        <servlet-name>ControlServlet</servlet-name>
+        <servlet-class>org.apache.ofbiz.webapp.control.ControlServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ControlServlet</servlet-name>
+        <url-pattern>/control/*</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>CORSFilter</filter-name>
         <filter-class>io.swagger.oas.inflector.utils.CORSFilter</filter-class>
+    </filter>
+    <filter>
+        <display-name>OpenapiAuthnFilter</display-name>
+        <filter-name>OpenapiAuthnFilter</filter-name>
+        <filter-class>langhua.openapi.demo.petstore.OpenapiAuthnFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>CORSFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>OpenapiAuthnFilter</filter-name>
+        <url-pattern>/api/v3/*</url-pattern>
+    </filter-mapping>
+
 </web-app>

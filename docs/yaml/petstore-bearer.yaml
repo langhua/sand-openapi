@@ -387,6 +387,17 @@ components:
             $ref: '#/components/schemas/Pet'
       description: Pet object that needs to be added to the store
   securitySchemes:
-    basicAuth:     # <-- arbitrary name for the security scheme
+    bearerAuth:
       type: http
-      scheme: basic
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+
+    access_token:
+      in: query
+      name: access_token
+      description: 访问令牌
+      required: true
+      schema:
+        type: string
+      example: "AT-7--cEerwho2pOGI2Tw2Mm1hN838KGzvSR1"
+

@@ -19,8 +19,6 @@ import org.apache.ofbiz.base.lang.JSON;
 import org.apache.ofbiz.base.util.Debug;
 import org.apache.ofbiz.base.util.UtilHttp;
 import org.apache.ofbiz.base.util.UtilValidate;
-import org.apache.ofbiz.entity.Delegator;
-import org.apache.ofbiz.entity.util.EntityUtilProperties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,7 +38,7 @@ public class OpenapiEvents {
     public static final String MODULE = OpenapiEvents.class.getName();
 
     private static final String[] IGNOREATTRS = new String[] {
-        // Attributes removed for security reason; _ERROR_MESSAGE_ is kept
+        // Attributes removed for security reason
         "javax.servlet.request.key_size",
         "_CONTEXT_ROOT_",
         "_FORWARDED_FROM_SERVLET_",
@@ -59,7 +57,16 @@ public class OpenapiEvents {
         "org.apache.logging.log4j.web.Log4jServletFilter.FILTERED",
         "org.apache.tomcat.util.net.secure_requested_protocol_versions",
         "org.apache.tomcat.util.net.secure_requested_ciphers",
-        "requestMapMap"
+        "requestMapMap",
+        "javax.servlet.forward.context_path",
+        "javax.servlet.forward.servlet_path",
+        "javax.servlet.forward.request_uri",
+        "javax.servlet.forward.path_info",
+        "OpenapiAuthnFilter.FILTERED",
+        "javax.servlet.forward.query_string",
+        "Set-Cookie",
+        "USERNAME",
+        "PASSWORD"
     };
 
     public static String jsonResponse(HttpServletRequest request, HttpServletResponse response) {
@@ -78,26 +85,12 @@ public class OpenapiEvents {
             } catch (NumberFormatException e) {
                 Debug.logError(e, MODULE);
             }
-        } else if (attrMap.containsKey("_ERROR_MESSAGE_")) {
+        }
+        if (attrMap.containsKey("_ERROR_MESSAGE_")) {
             String message = (String) attrMap.remove("_ERROR_MESSAGE_");
             attrMap.put("error", message);
         }
         response.setStatus(status);
-
-        Collection<String> headers = response.getHeaders(HttpHeaders.SET_COOKIE);
-        if (UtilValidate.isNotEmpty(headers)) {
-            String cookieStr = "[";
-            boolean isFirst = true;
-            for (String header : headers) {
-                if (!isFirst) {
-                    cookieStr += ",";
-                }
-                cookieStr += "'" + header + "'";
-                isFirst = false;
-            }
-            cookieStr += "]";
-            attrMap.put(HttpHeaders.SET_COOKIE, cookieStr);
-        }
 
         try {
             JSON json = JSON.from(attrMap);
@@ -115,19 +108,19 @@ public class OpenapiEvents {
 
         // This was added for security reason (OFBIZ-5409), you might need to remove the "//" prefix when handling the JSON response
         // Though normally you simply have to access the data you want, so should not be annoyed by the "//" prefix
-        if ("GET".equalsIgnoreCase(httpMethod)) {
-            Debug.logWarning("for security reason (OFBIZ-5409) the the '//' prefix was added handling the JSON response.  "
-                    + "Normally you simply have to access the data you want, so should not be annoyed by the '//' prefix."
-                    + "You might need to remove it if you use Ajax GET responses (not recommended)."
-                    + "In case, the util.js scrpt is there to help you."
-                    + "This can be customized in general.properties with the http.json.xssi.prefix property", MODULE);
-            Delegator delegator = (Delegator) request.getAttribute("delegator");
-            String xssiPrefix = EntityUtilProperties.getPropertyValue("general", "http.json.xssi.prefix", delegator);
-            jsonStr = xssiPrefix + jsonStr;
-        }
+//        if ("GET".equalsIgnoreCase(httpMethod)) {
+//            Debug.logWarning("for security reason (OFBIZ-5409) the the '//' prefix was added handling the JSON response.  "
+//                    + "Normally you simply have to access the data you want, so should not be annoyed by the '//' prefix."
+//                    + "You might need to remove it if you use Ajax GET responses (not recommended)."
+//                    + "In case, the util.js scrpt is there to help you."
+//                    + "This can be customized in general.properties with the http.json.xssi.prefix property", MODULE);
+//            Delegator delegator = (Delegator) request.getAttribute("delegator");
+//            String xssiPrefix = EntityUtilProperties.getPropertyValue("general", "http.json.xssi.prefix", delegator);
+//            jsonStr = xssiPrefix + jsonStr;
+//        }
 
         // set the JSON content type
-        response.setContentType("application/json; charset=" + StandardCharsets.UTF_8.toString());
+        response.setContentType("application/json; charset=" + StandardCharsets.UTF_8);
         // jsonStr.length is not reliable for unicode characters
         response.setContentLength(jsonStr.getBytes(StandardCharsets.UTF_8).length);
 

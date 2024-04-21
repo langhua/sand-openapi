@@ -55,18 +55,13 @@ export default defineConfig({
         secure: false,
         followRedirects: true,
       },
-      '/petstore/app': {
+      '/petstore/': {
         target: 'https://localhost:8443',
         changeOrigin: true,
         secure: false,
       },
       '/sample/': {
         target: 'https://localhost:8443/petstore/app',
-        changeOrigin: true,
-        secure: false,
-      },
-      '/petstore/api/': {
-        target: 'https://localhost:8443',
         changeOrigin: true,
         secure: false,
       },
