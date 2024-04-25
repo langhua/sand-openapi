@@ -19,6 +19,7 @@ import langhua.ofbiz.webapp.control.OAuth2LoginWorker;
 import org.apache.catalina.connector.RequestFacade;
 import org.apache.ofbiz.base.util.Debug;
 import org.apache.ofbiz.base.util.StringUtil;
+import org.apache.ofbiz.base.util.UtilHttp;
 import org.apache.ofbiz.base.util.UtilValidate;
 import org.apache.ofbiz.entity.Delegator;
 import org.apache.ofbiz.security.Security;
@@ -64,6 +65,10 @@ public class OpenapiAuthnFilter extends OncePerRequestFilter {
         if (userLogin == null) {
             try {
                 result = OAuth2LoginWorker.oauth2CasCheckLogin(request, response);
+                if (!request.isRequestedSessionIdValid()) {
+                    sendUnauthorized(request, response);
+                    return;
+                }
             } catch (Exception e) {
                 Debug.logError(e, MODULE);
             }
@@ -72,12 +77,20 @@ public class OpenapiAuthnFilter extends OncePerRequestFilter {
         userLogin = session.getAttribute("userLogin");
         if (!"success".equals(result) || userLogin == null) {
             result = JWTManager.checkJWTLogin(request, response);
+            if (!request.isRequestedSessionIdValid()) {
+                sendUnauthorized(request, response);
+                return;
+            }
         }
 
         userLogin = session.getAttribute("userLogin");
         if (!result.equals("success") || userLogin == null) {
             try {
                 result = checkBasicLogin(request, response);
+                if (!request.isRequestedSessionIdValid()) {
+                    sendUnauthorized(request, response);
+                    return;
+                }
             } catch (NoSuchFieldException | IllegalAccessException e) {
                 Debug.logError(e, MODULE);
             }
@@ -86,20 +99,29 @@ public class OpenapiAuthnFilter extends OncePerRequestFilter {
         userLogin = session.getAttribute("userLogin");
         if (!result.equals("success") || userLogin == null) {
             result = LoginWorker.checkLogin(request, response);
+            if (!request.isRequestedSessionIdValid()) {
+                sendUnauthorized(request, response);
+                return;
+            }
         }
 
         userLogin = session.getAttribute("userLogin");
         if (!result.equals("success") || userLogin == null) {
-            request.setAttribute("status", HttpServletResponse.SC_UNAUTHORIZED);
-            request.setAttribute("_ERROR_MESSAGE_", "Unauthorized. Login failed.");
-            request.getRequestDispatcher("/control/loginFailed").forward(request, response);
+            sendUnauthorized(request, response);
             return;
         }
 
         filterChain.doFilter(request, response);
     }
 
+    private void sendUnauthorized(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("status", HttpServletResponse.SC_UNAUTHORIZED);
+        request.setAttribute("_ERROR_MESSAGE_", "Unauthorized. Login failed.");
+        request.getRequestDispatcher("/control/loginFailed").forward(request, response);
+    }
+
     public static void prepareWebapp(HttpServletRequest request) {
+        UtilHttp.setInitialRequestInfo(request);
         HttpSession session = request.getSession();
         ServletContext servletContext = session.getServletContext();
         Delegator delegator = (Delegator) request.getAttribute("delegator");
@@ -113,16 +135,19 @@ public class OpenapiAuthnFilter extends OncePerRequestFilter {
             request.setAttribute("delegator", delegator);
         }
 
-        LocalDispatcher dispatcher = (LocalDispatcher) session.getAttribute("dispatcher");
+        LocalDispatcher dispatcher = (LocalDispatcher) request.getAttribute("dispatcher");
+        if (dispatcher == null) {
+            dispatcher = (LocalDispatcher) session.getAttribute("dispatcher");
+        }
         if (dispatcher == null) {
             dispatcher = (LocalDispatcher) servletContext.getAttribute("dispatcher");
         }
         if (dispatcher == null) {
             dispatcher = WebAppUtil.makeWebappDispatcher(servletContext, delegator);
-            if (dispatcher != null) {
-                request.setAttribute("dispatcher", dispatcher);
-                servletContext.setAttribute("dispatcher", dispatcher);
-            }
+        }
+        if (dispatcher != null) {
+            request.setAttribute("dispatcher", dispatcher);
+            servletContext.setAttribute("dispatcher", dispatcher);
         }
 
         Security security = (Security) session.getAttribute("security");

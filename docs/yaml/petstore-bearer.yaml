@@ -1,6 +1,6 @@
 openapi: 3.0.2
 servers:
-  - url: /openapi/v3
+  - url: /petstore/api/v3
 info:
   description: |-
     This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
@@ -46,7 +46,8 @@ paths:
         '405':
           description: Invalid input
       security:
-        - basicAuth: []
+        - ofbiz_jwt: []
+        - access_token: []
       requestBody:
         description: Create a new pet in the store
         required: true
@@ -83,7 +84,8 @@ paths:
         '405':
           description: Validation exception
       security:
-        - basicAuth: []
+        - ofbiz_jwt: []
+        - access_token: []
       requestBody:
         description: Update an existent pet in the store
         required: true
@@ -134,7 +136,8 @@ paths:
         '400':
           description: Invalid status value
       security:
-        - basicAuth: []
+        - ofbiz_jwt: []
+        - access_token: []
   /pet/findByTags:
     get:
       tags:
@@ -171,7 +174,8 @@ paths:
         '400':
           description: Invalid tag value
       security:
-        - basicAuth: []
+        - ofbiz_jwt: []
+        - access_token: []
   '/pet/{petId}':
     get:
       tags:
@@ -202,7 +206,8 @@ paths:
         '404':
           description: Pet not found
       security:
-        - basicAuth: []
+        - ofbiz_jwt: []
+        - access_token: []
     post:
       tags:
         - pet
@@ -232,7 +237,8 @@ paths:
         '405':
           description: Invalid input
       security:
-        - basicAuth: []
+        - ofbiz_jwt: []
+        - access_token: []
     delete:
       tags:
         - pet
@@ -257,7 +263,8 @@ paths:
         '400':
           description: Invalid pet value
       security:
-        - basicAuth: []
+        - ofbiz_jwt: []
+        - access_token: []
   '/pet/{petId}/uploadImage':
     post:
       tags:
@@ -287,7 +294,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
       security:
-        - basicAuth: []
+        - ofbiz_jwt: []
+        - access_token: []
       requestBody:
         content:
           application/octet-stream:
@@ -387,17 +395,12 @@ components:
             $ref: '#/components/schemas/Pet'
       description: Pet object that needs to be added to the store
   securitySchemes:
-    bearerAuth:
+    ofbiz_jwt:
       type: http
       scheme: bearer
       bearerFormat: JWT    # optional, arbitrary value for documentation purposes
 
     access_token:
-      in: query
-      name: access_token
-      description: 访问令牌
-      required: true
-      schema:
-        type: string
-      example: "AT-7--cEerwho2pOGI2Tw2Mm1hN838KGzvSR1"
+      type: http
+      scheme: bearer
 

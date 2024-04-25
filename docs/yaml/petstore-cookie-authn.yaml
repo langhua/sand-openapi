@@ -1,6 +1,6 @@
 openapi: 3.0.2
 servers:
-  - url: /openapi/v3
+  - url: /petstore/api/v3
 info:
   description: |-
     This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
@@ -46,9 +46,7 @@ paths:
         '405':
           description: Invalid input
       security:
-        - cookieAuth: []:
-            - 'write:pets'
-            - 'read:pets'
+        - cookieAuth: []
       requestBody:
         description: Create a new pet in the store
         required: true
@@ -85,9 +83,7 @@ paths:
         '405':
           description: Validation exception
       security:
-        - cookieAuth: []:
-            - 'write:pets'
-            - 'read:pets'
+        - cookieAuth: []
       requestBody:
         description: Update an existent pet in the store
         required: true
@@ -138,9 +134,7 @@ paths:
         '400':
           description: Invalid status value
       security:
-        - cookieAuth: []:
-            - 'write:pets'
-            - 'read:pets'
+        - cookieAuth: []
   /pet/findByTags:
     get:
       tags:
@@ -177,9 +171,7 @@ paths:
         '400':
           description: Invalid tag value
       security:
-        - cookieAuth: []:
-            - 'write:pets'
-            - 'read:pets'
+        - cookieAuth: []
   '/pet/{petId}':
     get:
       tags:
@@ -210,10 +202,7 @@ paths:
         '404':
           description: Pet not found
       security:
-        - api_key: []
-        - cookieAuth: []:
-            - 'write:pets'
-            - 'read:pets'
+        - cookieAuth: []
     post:
       tags:
         - pet
@@ -243,9 +232,7 @@ paths:
         '405':
           description: Invalid input
       security:
-        - cookieAuth: []:
-            - 'write:pets'
-            - 'read:pets'
+        - cookieAuth: []
     delete:
       tags:
         - pet
@@ -270,9 +257,7 @@ paths:
         '400':
           description: Invalid pet value
       security:
-        - cookieAuth: []:
-            - 'write:pets'
-            - 'read:pets'
+        - cookieAuth: []
   '/pet/{petId}/uploadImage':
     post:
       tags:
@@ -302,9 +287,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
       security:
-        - cookieAuth: []:
-            - 'write:pets'
-            - 'read:pets'
+        - cookieAuth: []
       requestBody:
         content:
           application/octet-stream:

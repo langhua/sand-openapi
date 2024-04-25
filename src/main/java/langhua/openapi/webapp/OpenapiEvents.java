@@ -18,17 +18,17 @@ package langhua.openapi.webapp;
 import org.apache.ofbiz.base.lang.JSON;
 import org.apache.ofbiz.base.util.Debug;
 import org.apache.ofbiz.base.util.UtilHttp;
-import org.apache.ofbiz.base.util.UtilValidate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.HttpHeaders;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Openapi Events
@@ -90,6 +90,15 @@ public class OpenapiEvents {
             String message = (String) attrMap.remove("_ERROR_MESSAGE_");
             attrMap.put("error", message);
         }
+        if (attrMap.containsKey("_ERROR_MESSAGE_LIST")) {
+            Set<String> errors = new HashSet<>();
+            @SuppressWarnings("unchecked")
+            List<String> errorMessages = (List<String>) attrMap.remove("_ERROR_MESSAGE_LIST");
+            for (String errorMessage : errorMessages) {
+                errors.add(errorMessage);
+            }
+            attrMap.put("error_details", errors);
+        }
         response.setStatus(status);
 
         try {
@@ -104,7 +113,6 @@ public class OpenapiEvents {
 
     private static void writeJSONtoResponse(JSON json, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         String jsonStr = json.toString();
-        String httpMethod = request.getMethod();
 
         // This was added for security reason (OFBIZ-5409), you might need to remove the "//" prefix when handling the JSON response
         // Though normally you simply have to access the data you want, so should not be annoyed by the "//" prefix

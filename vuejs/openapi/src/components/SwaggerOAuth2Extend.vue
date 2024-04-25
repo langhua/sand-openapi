@@ -12,8 +12,10 @@ const oauth2AndLogout = (_system: any) => {
             // external logout for openapi 3.0 only
             var logoutServer = ""
             var logoutUri = ""
+            var oauth2LogoutUri = ""
             if (_system.specSelectors.isOAS3()) {
-              const scheme = _system.specSelectors.specJson().get("components").get("securitySchemes").get(payload[0]).get("scheme")
+              const type = _system.specSelectors.specJson().get("components").get("securitySchemes").get(payload[0]).get("type")
+              const bearerFormat = _system.specSelectors.specJson().get("components").get("securitySchemes").get(payload[0]).get("bearerFormat")
               const server = _system.oas3Selectors.selectedServer()
               if (server != undefined && server.length > 0) {
                 if (server.startsWith('/')) {
@@ -21,9 +23,14 @@ const oauth2AndLogout = (_system: any) => {
                   const uriRegex = /(\/[-a-zA-Z0-9()@:%_\+.~#?&=]*)([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g
                   const groups = uriRegex.exec(server)
                   if (groups != null && groups.length >= 2 && groups[1].length > 1) {
-                    if (scheme == "basic") {
+                    if (type == "http" || type == "apiKey") {
                       logoutServer = window.location.origin
-                      logoutUri = groups[1] + "/control/logout"
+                      if (bearerFormat != 'JWT') {
+                        logoutUri = groups[1] + "/control/logout"
+                        oauth2LogoutUri = "/oauth/logout"
+                      } else {
+                        logoutUri = groups[1] + "/control/logout"
+                      }
                     }
                   }
                 } else {
@@ -31,9 +38,14 @@ const oauth2AndLogout = (_system: any) => {
                   const urlRegex = /(https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}[\.a-zA-Z0-9()]{1,6}\b)(\/?[-a-zA-Z0-9()@:%_\+.~#?&=]*)([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/gi
                   const groups = urlRegex.exec(server)
                   if (groups != null && groups.length >= 3 && groups[1].length > 1 && groups[2].length > 1) {
-                    if (scheme == "basic") {
+                    if (type == "http" || type == "apiKey") {
                       logoutServer = groups[1]
-                      logoutUri = groups[2] + "/control/logout"
+                      if (bearerFormat != 'JWT') {
+                        logoutUri = groups[1] + "/control/logout"
+                        oauth2LogoutUri = "/oauth/logout"
+                      } else {
+                        logoutUri = groups[1] + "/control/logout"
+                      }
                     }
                   }
                 }
@@ -42,6 +54,10 @@ const oauth2AndLogout = (_system: any) => {
             if (logoutServer == "" || logoutUri == "") {
               console.log("No logout url will be fetched.")
             } else {
+              if (oauth2LogoutUri.length > 0) {
+                console.log("OAuth2 Logout: " + logoutServer + oauth2LogoutUri)
+                fetch(logoutServer + oauth2LogoutUri)
+              }
               console.log("Logout: " + logoutServer + logoutUri)
               fetch(logoutServer + logoutUri)
             }
