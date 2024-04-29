@@ -19,9 +19,10 @@ export default defineConfig({
     },
     preserveSymlinks: true
   },
-  base: './',
+  base: process.env.NODE_ENV === 'production' ? '/openapi/v3/' : './',
+  // base: './',
   build: {
-    outDir: '../../webapp/openapi/v3',
+    outDir: '../../webapp/openapi/v3/',
     chunkSizeWarningLimit: 1500, // 文件大小超过1500kb时显示警告提示
     rollupOptions: {
       output: {

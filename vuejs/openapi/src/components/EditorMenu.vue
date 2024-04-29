@@ -2,6 +2,8 @@
   import router from '@/router';
   import { ref, watch } from 'vue';
 
+  const env = import.meta.env
+
   const props = defineProps({
     fileUri: String
   })
@@ -29,17 +31,17 @@
 
   const gotoEditor = () => {
     if (props.fileUri != undefined) {
-      router.push({path: '/editor', query: {fileUri: props.fileUri}})
+      router.push({path: env.VITE_OPENAPI_BASE_URL + 'editor', query: {fileUri: props.fileUri}})
     } else {
-      router.push({path: '/editor', query: {fileUri: router.currentRoute.value.query.fileUri}})
+      router.push({path: env.VITE_OPENAPI_BASE_URL + 'editor', query: {fileUri: router.currentRoute.value.query.fileUri}})
     }
   }
 
   const gotoView = () => {
     if (props.fileUri != undefined) {
-      router.push({path: '/viewfile', query: {fileUri: props.fileUri}})
+      router.push({path: env.VITE_OPENAPI_BASE_URL + 'viewfile', query: {fileUri: props.fileUri}})
     } else {
-      router.push({path: '/viewfile', query: {fileUri: router.currentRoute.value.query.fileUri}})
+      router.push({path: env.VITE_OPENAPI_BASE_URL + 'viewfile', query: {fileUri: router.currentRoute.value.query.fileUri}})
     }
   }
 

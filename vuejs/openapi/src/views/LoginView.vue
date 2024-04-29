@@ -4,6 +4,8 @@ import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
 import router from '@/router'
 import { useRoute } from 'vue-router'
 
+const env = import.meta.env
+
 const route = useRoute()
 const fileUri = ref<string>('')
 if (route != undefined && route.query != undefined && route.query.fileUri != undefined) {
@@ -80,9 +82,9 @@ const cookieAuthn = (cookieAuthnForm: { username: string; password: string }) =>
                               message: 'Logged in successfully.'
                             })
                     if (fileUri.value != '') {
-                      router.push({path: '/viewfile', query: {fileUri: fileUri.value}})
+                      router.push({path: env.VITE_OPENAPI_BASE_URL + 'viewfile', query: {fileUri: fileUri.value}})
                     } else {
-                      router.push({path: '/viewfile'})
+                      router.push({path: env.VITE_OPENAPI_BASE_URL + 'viewfile'})
                     }
                   }
                 })

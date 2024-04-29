@@ -228,7 +228,7 @@ const viewFile = (data: FileTree)  => {
       }
     })
     if (extension != undefined && foundExt) {
-      router.push({path: '/viewfile', query: {fileUri: data.path}})
+      router.push({path: env.VITE_OPENAPI_BASE_URL + 'viewfile', query: {fileUri: data.path}})
       emits("closeFileDrawer", data.path)
     }
   }
@@ -244,7 +244,7 @@ const editFile = (data: FileTree)  => {
       }
     })
     if (extension != undefined && foundExt) {
-      router.push({path: '/editor', query: {fileUri: data.path}})
+      router.push({path: env.VITE_OPENAPI_BASE_URL + 'editor', query: {fileUri: data.path}})
       emits("closeFileDrawer", data.path)
     }
   }
