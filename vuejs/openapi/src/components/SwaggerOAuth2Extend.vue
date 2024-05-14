@@ -17,20 +17,17 @@ const oauth2AndLogout = (_system: any) => {
               const type = _system.specSelectors.specJson().get("components").get("securitySchemes").get(payload[0]).get("type")
               const bearerFormat = _system.specSelectors.specJson().get("components").get("securitySchemes").get(payload[0]).get("bearerFormat")
               const server = _system.oas3Selectors.selectedServer()
+              logoutServer = window.location.origin
               if (server != undefined && server.length > 0) {
                 if (server.startsWith('/')) {
                   // this is an uri
                   const uriRegex = /(\/[-a-zA-Z0-9()@:%_\+.~#?&=]*)([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g
                   const groups = uriRegex.exec(server)
                   if (groups != null && groups.length >= 2 && groups[1].length > 1) {
-                    if (type == "http" || type == "apiKey") {
-                      logoutServer = window.location.origin
-                      if (bearerFormat != 'JWT') {
-                        logoutUri = groups[1] + "/control/logout"
-                        oauth2LogoutUri = "/oauth/logout"
-                      } else {
-                        logoutUri = groups[1] + "/control/logout"
-                      }
+                    logoutUri = groups[1] + "/control/logout"
+                    const scheme = _system.specSelectors.specJson().get("components").get("securitySchemes").get(payload[0]).get("scheme")
+                    if (type == "oauth2" || (type == "http" && scheme == "bearer" && bearerFormat != 'JWT')) {
+                      oauth2LogoutUri = "/oauth/logout"
                     }
                   }
                 } else {
@@ -38,14 +35,11 @@ const oauth2AndLogout = (_system: any) => {
                   const urlRegex = /(https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}[\.a-zA-Z0-9()]{1,6}\b)(\/?[-a-zA-Z0-9()@:%_\+.~#?&=]*)([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/gi
                   const groups = urlRegex.exec(server)
                   if (groups != null && groups.length >= 3 && groups[1].length > 1 && groups[2].length > 1) {
-                    if (type == "http" || type == "apiKey") {
-                      logoutServer = groups[1]
-                      if (bearerFormat != 'JWT') {
-                        logoutUri = groups[1] + "/control/logout"
-                        oauth2LogoutUri = "/oauth/logout"
-                      } else {
-                        logoutUri = groups[1] + "/control/logout"
-                      }
+                    logoutServer = groups[1]
+                    logoutUri = groups[1] + "/control/logout"
+                    const scheme = _system.specSelectors.specJson().get("components").get("securitySchemes").get(payload[0]).get("scheme")
+                    if (type == "oauth2" || (type == "http" && scheme == "bearer" && bearerFormat != 'JWT')) {
+                      oauth2LogoutUri = "/oauth/logout"
                     }
                   }
                 }

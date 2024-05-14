@@ -44,5 +44,4 @@ yaml/petstore-basic-authn.yaml中定义了Basic认证，如下所示：
 ### 参考文档
 1. [Basic Authentication](https://swagger.io/docs/specification/authentication/basic-authentication/)
 2. [Http Bearer认证](bearer-authn.md)
-3. [Cookie认证](cookie-authn.md)
-4. [OAuth 2.0认证](oauth2.md)
+3. [OAuth 2.0认证](oauth2.md)

@@ -61,7 +61,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 #swagger-editor {
   margin-top: 50px;
 }

@@ -33,25 +33,25 @@ under the License.
     <request-map uri="login">
         <security https="true" auth="false"/>
         <event type="java" path="org.apache.ofbiz.webapp.control.LoginWorker" invoke="login"/>
-        <response name="success" type="none"/>
-        <response name="requirePasswordChange" type="none"/>
-        <response name="error" type="none"/>
+        <response name="success" type="request" value="json"/>
+        <response name="requirePasswordChange" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
     </request-map>
 
     <request-map uri="checkLogin">
         <description>Verify a user is logged in.</description>
         <security https="true" auth="false"/>
         <event type="java" path="org.apache.ofbiz.webapp.control.LoginWorker" invoke="extensionCheckLogin"/>
-        <response name="success" type="none"/>
-        <response name="impersonated" type="none"/>
-        <response name="error" type="none"/>
+        <response name="success" type="request" value="json"/>
+        <response name="impersonated" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
     </request-map>
 
     <request-map uri="logout">
         <security https="true" auth="true" csrf-token="false"/>
         <event type="java" path="org.apache.ofbiz.webapp.control.LoginWorker" invoke="logout"/>
-        <response name="success" type="none"/>
-        <response name="error" type="none"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
     </request-map>
 
     <request-map uri="json">

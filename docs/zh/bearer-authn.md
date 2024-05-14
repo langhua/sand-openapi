@@ -105,5 +105,4 @@ yaml/petstore-bearer.yaml中定义了两个Bearer认证，ofbiz_jwt和access_tok
 ### 参考资料
 1. [OpenAPI - Bearer Authentication](https://swagger.io/docs/specification/)
 2. [Http基本认证](basic-authn.md)
-3. [Cookie认证](cookie-authn.md)
-4. [OAuth 2.0认证](oauth2.md)
+3. [OAuth 2.0认证](oauth2.md)

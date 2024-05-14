@@ -54,7 +54,6 @@ public class OpenapiAuthnFilter extends OncePerRequestFilter {
           1. OAuth2LoginWorker.oauth2CasCheckLogin(), include bearer token authentication
           2. JWTManager.getJWTToken()
           3. Http Basic authentication
-          4. Cookie authentication
          */
 
         HttpSession session = request.getSession();
