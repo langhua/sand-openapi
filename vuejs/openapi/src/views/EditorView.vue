@@ -61,11 +61,13 @@
   </div>
 </template>
 
-<style scoped>
+<style>
 #swagger-editor {
   margin-top: 50px;
 }
+</style>
 
+<style scoped>
 :deep(.el-drawer__header) {
   margin-bottom: 0px;
   border-bottom: 1px solid darksalmon;

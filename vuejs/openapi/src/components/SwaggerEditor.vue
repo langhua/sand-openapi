@@ -53,15 +53,15 @@ const showSwaggerEditor = () => {
   }
 
   editor.value = SwaggerEditorBundle({
-      // 或者使用json样例文件: https://petstore.swagger.io/v2/swagger.json
-      url: uri.value,
-      dom_id: '#swagger-editor',
-      // 如果注释掉layout，则不显示页眉的菜单栏
-      // layout: 'StandaloneLayout',
-      presets: [
-          SwaggerEditorStandalonePreset
-      ],
-      queryConfigEnabled: false,
+    // 或者使用json样例文件: https://petstore.swagger.io/v2/swagger.json
+    url: uri.value,
+    dom_id: '#swagger-editor',
+    // 如果注释掉layout，则不显示页眉的菜单栏
+    // layout: 'StandaloneLayout',
+    presets: [
+        SwaggerEditorStandalonePreset
+    ],
+    queryConfigEnabled: false,
   })
 }
 

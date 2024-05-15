@@ -817,6 +817,9 @@ components:
           authorizationUrl: '/oauth/v2/authorize'
           tokenUrl: '/oauth/v2/accessToken'
           refreshUrl: '/oauth/v2/accessToken'
+          scopes:
+            'write:pets': modify pets in your account
+            'read:pets': read your pets
 
     implicitLogin:
       type: oauth2
@@ -836,6 +839,9 @@ components:
         password:
           tokenUrl: '/oauth/v2/accessToken'
           refreshUrl: '/oauth/v2/accessToken'
+          scopes:
+            'write:pets': modify pets in your account
+            'read:pets': read your pets
 
     clientLogin:
       type: oauth2
@@ -844,3 +850,6 @@ components:
         clientCredentials:
           tokenUrl: '/oauth/v2/accessToken'
           refreshUrl: '/oauth/v2/accessToken'
+          scopes:
+            'write:pets': modify pets in your account
+            'read:pets': read your pets
