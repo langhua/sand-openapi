@@ -45,6 +45,10 @@
     }
   }
 
+  const saveFile = ($parent: any) => {
+    $parent.saveEditorContent()
+  }
+
   watch(props, () => {
     if (props.fileUri != '') {
       menuItemDisabled.value = false
@@ -61,6 +65,7 @@
 
   defineExpose ({
     cancelSelection,
+    saveFile
   })
 </script>
 
@@ -74,10 +79,11 @@
   >
     <el-menu-item index="1" @click="handleFileClick($parent)">File</el-menu-item>
     <el-menu-item v-if="router.currentRoute.value.name != 'editor'" index="2" @click="gotoEditor" :disabled="menuEditDisabled">Edit</el-menu-item>
-    <el-menu-item v-else index="2" :disabled="menuItemDisabled" @click="gotoView">View</el-menu-item>
-    <el-menu-item index="3" :disabled="menuItemDisabled">Generate Server</el-menu-item>
-    <el-menu-item index="4" :disabled="menuItemDisabled">Generate Client</el-menu-item>
-    <el-menu-item index="5">About</el-menu-item>
+    <el-menu-item v-if="router.currentRoute.value.name == 'editor'" index="3" :disabled="menuItemDisabled" @click="saveFile($parent)">Save</el-menu-item>
+    <el-menu-item v-if="router.currentRoute.value.name == 'editor'" index="4" :disabled="menuItemDisabled" @click="gotoView">View</el-menu-item>
+    <el-menu-item index="5" :disabled="menuItemDisabled">Generate Server</el-menu-item>
+    <el-menu-item index="6" :disabled="menuItemDisabled">Generate Client</el-menu-item>
+    <el-menu-item index="7">About</el-menu-item>
   </el-menu>
 </template>
 

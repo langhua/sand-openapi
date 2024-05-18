@@ -16,6 +16,7 @@
   const direction = ref('ltr')
   const fileDrawer = ref(false)
   const editorMenuRef = ref()
+  const editorRef = ref()
   const closeFileDrawer = () => {
     if (editorMenuRef != null && editorMenuRef.value != null) {
       editorMenuRef.value.cancelSelection()
@@ -31,15 +32,23 @@
   const openDrawer = () => {
   }
 
+  const saveEditorContent = () => {
+    editorRef.value.saveContent()
+    setTimeout(() => {
+      editorMenuRef.value.cancelSelection()
+  	}, 4000);
+  }
+
   defineExpose ({
-    openFileDrawer
+    openFileDrawer,
+    saveEditorContent
   })
 </script>
 
 <template>
   <!-- <SwaggerUI /> -->
   <EditorMenu ref="editorMenuRef"/>
-  <SwaggerEditor :fileUri="fileUri"/>
+  <SwaggerEditor ref="editorRef" :fileUri="fileUri"/>
 
   <div>
     <el-drawer

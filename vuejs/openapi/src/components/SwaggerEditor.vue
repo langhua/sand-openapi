@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, defineExpose } from 'vue'
 const uri = ref<string>('')
 
 import '@/assets/swagger-editor-dist/swagger-editor.css'
@@ -44,6 +44,9 @@ import '@/assets/swagger-editor-dist/swagger-editor.css'
 import SwaggerEditorBundle from '@/assets/swagger-editor-dist/swagger-editor-es-bundle.js'
 // @ts-ignore
 import SwaggerEditorStandalonePreset from '@/assets/swagger-editor-dist/swagger-editor-standalone-preset.js'
+
+import axios from 'axios'
+import { ElMessage } from 'element-plus'
 
 const editor = ref<SwaggerEditorBundle>(null)
 
@@ -66,23 +69,54 @@ const showSwaggerEditor = () => {
 }
 
 export default {
-  props: {
-    fileUri: String
-  },
-  setup(props) {
-    if (props.fileUri != undefined && props.fileUri != '') {
-      uri.value = props.fileUri
-    }
-
-    watch(props, () => {
-      uri.value = props.fileUri == undefined? '' : props.fileUri
-      showSwaggerEditor()
-    })
-  },
   mounted() {
     showSwaggerEditor()
   }
 }
+</script>
+
+<script setup lang="ts">
+  const props = defineProps({
+    fileUri: String
+  })
+
+  if (props.fileUri != undefined && props.fileUri != '') {
+    uri.value = props.fileUri
+  }
+
+  watch(props, () => {
+    uri.value = props.fileUri == undefined? '' : props.fileUri
+    showSwaggerEditor()
+    // after the SwaggerEditor have been disposed of, terminate the worker manually
+    editor.value.jsonSchemaValidatorActions.terminateWorker();
+  })
+
+  const saveContent = () => {
+    let editorContent = editor.value.specSelectors.specStr()
+    
+    setTimeout(async () => {
+      await axios({method: 'put',
+                    url: uri.value,
+                    headers: {
+                      "Content-Type": "application/octet-stream"
+                    },
+                    data: editorContent
+                  })
+                  .then(response => {
+                    if (response.status == 204) {
+                      ElMessage({
+                                  type: 'success',
+                                  message: uri.value + ' has been saved successfully.',
+                                  duration: 3000
+                                })
+                    }
+                  })
+    }, 2000)
+  }
+
+  defineExpose({
+    saveContent
+  })
 </script>
 
 <style>
