@@ -45,29 +45,29 @@
         <servlet-name>webdav</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>webdav</web-resource-name>
-            <!-- Detect WebDAV Methods in URL For Whole Application -->
-            <url-pattern>/*</url-pattern>
-            <http-method>PROPFIND</http-method>
-            <http-method>PROPPATCH</http-method>
-            <http-method>COPY</http-method>
-            <http-method>MOVE</http-method>
-            <http-method>LOCK</http-method>
-            <http-method>UNLOCK</http-method>
-        </web-resource-collection>
-        <!-- Restrict access by role -->
-        <auth-constraint>
-            <role-name>*</role-name>
-        </auth-constraint>
-    </security-constraint>
-    <login-config>
-        <auth-method>BASIC</auth-method>
-        <realm-name>webdav</realm-name>
-    </login-config>
-    <security-role>
-        <description>WebDAV User</description>
-        <role-name>webdav</role-name>
-    </security-role>
+<!--    <security-constraint>-->
+<!--        <web-resource-collection>-->
+<!--            <web-resource-name>webdav</web-resource-name>-->
+<!--            &lt;!&ndash; Detect WebDAV Methods in URL For Whole Application &ndash;&gt;-->
+<!--            <url-pattern>/*</url-pattern>-->
+<!--            <http-method>PROPFIND</http-method>-->
+<!--            <http-method>PROPPATCH</http-method>-->
+<!--            <http-method>COPY</http-method>-->
+<!--            <http-method>MOVE</http-method>-->
+<!--            <http-method>LOCK</http-method>-->
+<!--            <http-method>UNLOCK</http-method>-->
+<!--        </web-resource-collection>-->
+<!--        &lt;!&ndash; Restrict access by role &ndash;&gt;-->
+<!--        <auth-constraint>-->
+<!--            <role-name>*</role-name>-->
+<!--        </auth-constraint>-->
+<!--    </security-constraint>-->
+<!--    <login-config>-->
+<!--        <auth-method>BASIC</auth-method>-->
+<!--        <realm-name>webdav</realm-name>-->
+<!--    </login-config>-->
+<!--    <security-role>-->
+<!--        <description>WebDAV User</description>-->
+<!--        <role-name>webdav</role-name>-->
+<!--    </security-role>-->
 </web-app>

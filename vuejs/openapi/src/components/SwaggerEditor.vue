@@ -106,7 +106,7 @@ export default {
                     if (response.status == 204) {
                       ElMessage({
                                   type: 'success',
-                                  message: uri.value + ' has been saved successfully.',
+                                  message: decodeURIComponent(uri.value) + ' has been saved successfully.',
                                   duration: 3000
                                 })
                     }

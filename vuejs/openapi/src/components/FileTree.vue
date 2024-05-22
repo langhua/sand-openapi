@@ -62,7 +62,7 @@ const refreshFolder = (node: Node) => {
 const deleteNode = (node: Node, data: FileTree) => {
   var parentNode = node.parent
   ElMessageBox.confirm(
-    data.path + ' will be deleted permanently. Continue?',
+    decodeURIComponent(data.path) + ' will be deleted permanently. Continue?',
       'Warning',
       {
         confirmButtonText: 'Confirm',
@@ -120,7 +120,7 @@ const newDoc = ()  => {
                         tempPath = tempPath.slice(tempPath.indexOf('/'))
                         ElMessage({
                                     type: 'success',
-                                    message: tempPath + input.value + fileExtention.value + ' has been created successfully.',
+                                    message: decodeURIComponent(tempPath) + input.value + fileExtention.value + ' has been created successfully.',
                                   })
 
                         if (parentNodeForEdit && parentNodeForEdit.value) {
@@ -166,7 +166,7 @@ const newFolder = ()  => {
                         tempPath = tempPath.slice(tempPath.indexOf('/'))
                         ElMessage({
                                     type: 'success',
-                                    message: tempPath + input.value + ' has been created successfully.',
+                                    message: decodeURIComponent(tempPath) + input.value + ' has been created successfully.',
                                   })
 
                         if (parentNodeForEdit && parentNodeForEdit.value) {
@@ -190,12 +190,12 @@ const showRenameFileDlg = (node: Node, data: FileTree) => {
 
 const renameFile = () => {
   renameFileDlgVisible.value = false
-  let targetPath = nodeForEdit.value?.data.path.slice(0, nodeForEdit.value?.data.path.lastIndexOf('/') + 1) + input.value + renameFileExt
+  let targetPath = nodeForEdit.value?.data.path.slice(0, nodeForEdit.value?.data.path.lastIndexOf('/') + 1) + input.value + renameFileExt.value
   setTimeout(async () => {
     await axios({method: 'move',
                  url: nodeForEdit.value?.data.path,
                  headers: {
-                   Destination: targetPath,
+                   Destination: encodeURIComponent(targetPath),
                  }
                 })
                 .then(response => {
@@ -249,6 +249,77 @@ const editFile = (data: FileTree)  => {
     }
   }
 }
+
+const resourceInCut = ref('')
+const toggleCutResource = (data: FileTree) => {
+  if (resourceInCut.value != '') {
+    if (resourceInCut.value != data.path) {
+      resourceInCut.value = data.path
+    } else {
+      resourceInCut.value = ''
+    }
+  } else {
+    resourceInCut.value = data.path
+  }
+  resourceInCopy.value = ''
+}
+
+const resourceInCopy = ref('')
+const toggleCopyResource = (data: FileTree) => {
+  if (resourceInCopy.value != '') {
+    if (resourceInCopy.value != data.path) {
+      resourceInCopy.value = data.path
+    } else {
+      resourceInCopy.value = ''
+    }
+  } else {
+    resourceInCopy.value = data.path
+  }
+  resourceInCut.value = ''
+}
+
+const pasteResource = (node: Node, data: FileTree) => {
+  if (resourceInCopy.value != '' || resourceInCut.value != '') {
+    let method = resourceInCopy.value != ''? 'copy' : 'move'
+    let srcpathes: string[] = []
+    if (resourceInCopy.value != '') {
+      srcpathes = resourceInCopy.value.split('/')
+    } else if (resourceInCut.value != '') {
+      srcpathes = resourceInCut.value.split('/')
+    }
+
+    let destination = data.path
+    if (srcpathes[srcpathes.length - 1] == '') {
+      destination += srcpathes[srcpathes.length - 2] + '/'
+    } else {
+      destination += srcpathes[srcpathes.length - 1]
+    }
+
+    setTimeout(async () => {
+      await axios({method: method,
+                  url: resourceInCopy.value != ''? resourceInCopy.value : resourceInCut.value,
+                  headers: {
+                    Destination: destination,
+                  }
+                  })
+                  .then(response => {
+                        if (response.status > 200 && response.status <= 300) {
+                          ElMessage({
+                                      type: 'success',
+                                      message: method + ' to ' + decodeURIComponent(data.path) + ' successfully.',
+                                    })
+                          resourceInCopy.value = ''
+                          resourceInCut.value = ''
+                          // node.parent.loaded = false
+                          // node.parent.expand()
+
+                          node.loaded = false
+                          node.expand()
+                        }
+                    })
+    }, 500)
+  }
+}
 </script>
 
 <template>
@@ -262,8 +333,8 @@ const editFile = (data: FileTree)  => {
   >
     <template #default="{ node, data }">
       <span class="custom-tree-node">
-        <el-icon v-if="data.type == 'File'" class="file-node-icon" color="green"><Document /></el-icon>
-        <el-icon v-else-if="data.type == 'Dir'" class="file-node-icon"><Folder /></el-icon>
+        <el-icon v-if="data.type == 'File'" :class="resourceInCut == data.path? 'file-node-icon cutcolor' : (resourceInCopy == data.path? 'file-node-icon copycolor' : 'file-node-icon greencolor')"><Document /></el-icon>
+        <el-icon v-else-if="data.type == 'Dir'" :class="resourceInCut == data.path? 'file-node-icon cutcolor' : (resourceInCopy == data.path? 'file-node-icon copycolor' : 'file-node-icon')"><Folder /></el-icon>
         <span class="tree-node-label" @dblclick="viewFile(data)"> {{ node.label }} </span>
         <span>
           <el-popover
@@ -274,9 +345,7 @@ const editFile = (data: FileTree)  => {
               <el-icon class="el-icon--right"><MoreFilled /></el-icon>
             </template>
             <template #default>
-              <div
-                style="display: flex; flex-direction: column; color:gray;"
-              >
+              <div style="display: flex; flex-direction: column; color: gray;">
                 <span v-if="data.type == 'Dir'">
                   <a style="padding-right: 4px;">
                     <el-icon>
@@ -298,7 +367,7 @@ const editFile = (data: FileTree)  => {
                     <el-icon>
                       <el-tooltip class="box-item" effect="dark" placement="top-start"
                           content="Cut">
-                        <Cut />
+                        <Cut @click="toggleCutResource(data)"/>
                       </el-tooltip>
                     </el-icon>
                   </a>
@@ -306,7 +375,7 @@ const editFile = (data: FileTree)  => {
                     <el-icon>
                       <el-tooltip class="box-item" effect="dark" placement="top"
                           content="Copy Folder">
-                        <CopyDocument />
+                        <CopyDocument @click="toggleCopyResource(data)"/>
                       </el-tooltip>
                     </el-icon>
                   </a>
@@ -314,7 +383,7 @@ const editFile = (data: FileTree)  => {
                     <el-icon>
                       <el-tooltip class="box-item" effect="dark" placement="top"
                           content="Paste">
-                        <Paste />
+                        <Paste @click="pasteResource(node, data)"/>
                       </el-tooltip>
                     </el-icon>
                   </a>
@@ -348,7 +417,7 @@ const editFile = (data: FileTree)  => {
                     <el-icon>
                       <el-tooltip class="box-item" effect="dark" placement="top-start"
                           content="Cut">
-                        <Cut />
+                        <Cut @click="toggleCutResource(data)"/>
                       </el-tooltip>
                     </el-icon>
                   </a>
@@ -356,15 +425,7 @@ const editFile = (data: FileTree)  => {
                     <el-icon>
                       <el-tooltip class="box-item" effect="dark" placement="top"
                           content="Copy Document">
-                        <CopyDocument />
-                      </el-tooltip>
-                    </el-icon>
-                  </a>
-                  <a style="padding-right: 4px;">
-                    <el-icon>
-                      <el-tooltip class="box-item" effect="dark" placement="top"
-                          content="Paste">
-                        <Paste />
+                        <CopyDocument @click="toggleCopyResource(data)"/>
                       </el-tooltip>
                     </el-icon>
                   </a>
@@ -418,7 +479,7 @@ const editFile = (data: FileTree)  => {
   </el-tree>
 
   <el-dialog v-model="newDocDialogVisible" title="New document" width="40%" draggable class="filedlg">
-    <div>under {{ parentNodePath }}</div>
+    <div>under {{ decodeURIComponent(parentNodePath) }}</div>
     <div>
       <el-input v-model="input" placeholder="filename"/>
       <el-select v-model="fileExtention" placeholder="file type">
@@ -441,7 +502,7 @@ const editFile = (data: FileTree)  => {
   </el-dialog>
 
   <el-dialog v-model="newFolderDialogVisible" title="New folder" width="40%" draggable>
-    <div>under {{ parentNodePath }}</div>
+    <div>under {{ decodeURIComponent(parentNodePath) }}</div>
     <div>
       <el-input v-model="input" placeholder="folder name"/>
     </div>
@@ -515,5 +576,21 @@ span a:hover {
 .filedlg .el-select {
   width: 120px;
   float: left;
+}
+
+.cutcolor {
+  color: darksalmon;
+}
+
+.copycolor {
+  color: deeppink;
+}
+
+.graycolor {
+  color: gray;
+}
+
+.greencolor {
+  color: green;
 }
 </style>
