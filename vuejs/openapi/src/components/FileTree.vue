@@ -17,12 +17,20 @@ const env = import.meta.env
 const loadNode = (node: Node, resolve: (data: FileTree[]) => void) => {
   if (node.level == 0 || (node.data && node.data.type == 'Dir')) {
     setTimeout(async () => {
-      let dataSource: FileTree[] = [...await axios.get(env.VITE_SANDFLOWER_SERVER + ((node.level != 0) ? node.data.path : env.VITE_SANDFLOWER_SANDDAV_FILETREE))
-                                                  .then(response => {
-                                                          if (response.status == 200) {
-                                                            return JSON.parse(JSON.stringify(response.data)).resources
-                                                          }
-                                                      })]
+      let dataSource: FileTree[] = await axios({method: 'get',
+                                                url: ((node.level != 0) ? node.data.path : env.VITE_SANDFLOWER_SANDDAV_FILETREE),
+                                              })
+                                              .then(response => {
+                                                if (response.status == 200) {
+                                                  return JSON.parse(JSON.stringify(response.data)).resources
+                                                }
+                                              })
+                                              .catch(error => {
+                                                if (error.response != undefined && error.response.status == 401) {
+                                                  router.push({path: '/login'})
+                                                }
+                                              })
+
       if (node.level > 0 && dataSource[0] && dataSource[0].resources) {
         resolve(dataSource[0].resources)
       } else {

@@ -56,8 +56,8 @@ const cookieAuthn = (cookieAuthnForm: { username: string; password: string }) =>
     await axios({ method: 'post',
                   url: '/openapi/control/cookieAuthn',
                   params: {
-                    'username': cookieAuthnForm.username,
-                    'password': cookieAuthnForm.password
+                    'USERNAME': cookieAuthnForm.username,
+                    'PASSWORD': cookieAuthnForm.password
                   },
                 })
                 .then(response => {
@@ -97,6 +97,8 @@ const cookieAuthn = (cookieAuthnForm: { username: string; password: string }) =>
   }, 500)
 }
 
+const passwordRef = ref<HTMLInputElement|null>()
+
 const resetErrMsg = () => {
   usernameError.value = ''
   showUserNameError.value = false
@@ -104,8 +106,11 @@ const resetErrMsg = () => {
   showPasswordError.value = false
 }
 
-// end of cookie authn
-
+const focusPassword = () => {
+  if (passwordRef.value) {
+    passwordRef.value.focus()
+  }
+}
 </script>
 
 <template>
@@ -171,6 +176,7 @@ const resetErrMsg = () => {
                 <el-input v-model="cookieAuthnForm.username"
                   maxlength="80"
                   minlength="1"
+                  @keyup.enter="focusPassword"
                   id="username-login"/>
               </div>
             </el-form-item>
@@ -185,6 +191,8 @@ const resetErrMsg = () => {
                   type="password"
                   maxlength="40"
                   minlength="5"
+                  ref="passwordRef"
+                  @keyup.enter="submitCookieAuthnForm(cookieAuthnFormRef)"
                   id="password-login"/>
               </div>
             </el-form-item>

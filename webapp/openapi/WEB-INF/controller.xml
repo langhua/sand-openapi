@@ -35,6 +35,13 @@ under the License.
         <response name="error" type="request" value="json"/>
     </request-map>
 
+    <request-map uri="cookieLogout">
+        <security https="true" auth="false" csrf-token="false"/>
+        <event type="groovy" path="component://sand-openapi/groovyScripts/openapi/cookieLogout.groovy"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
     <request-map uri="json">
         <security direct-request="false"/>
         <event type="java" path="langhua.openapi.webapp.OpenapiEvents" invoke="jsonResponse"/>

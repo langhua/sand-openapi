@@ -49,6 +49,7 @@ export default defineConfig({
         target: 'https://localhost:8443',
         changeOrigin: true,
         secure: false,
+        followRedirects: true,
       },
       '/openapi/control/': {
         target: 'https://localhost:8443',

@@ -1,3 +1,4 @@
+package openapi
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -18,17 +19,12 @@
  */
 
 
-import org.apache.ofbiz.webapp.control.ExternalLoginKeysManager
 import org.apache.ofbiz.webapp.control.LoginWorker
 
-result = LoginWorker.login(request, response)
-userLogin = request.getSession().getAttribute("userLogin")
-if (result == "success" && userLogin) {
-    request.setAttribute("userLogin", userLogin)
-    externalLoginKey = ExternalLoginKeysManager.getExternalLoginKey(request)
-    if (externalLoginKey) {
-        response.setHeader("Set-Cookie", "externalLoginKey=" + externalLoginKey + "; HttpOnly; Path=/; secure")
-    }
+result = LoginWorker.logout(request, response)
+
+if (result == "success") {
+    response.setHeader("Set-Cookie", "externalLoginKey=; HttpOnly; Path=/; secure")
 }
 
 return result

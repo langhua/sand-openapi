@@ -65,7 +65,7 @@ public class OpenapiWebdavServlet extends WebdavServlet {
 
     private static boolean isMainSet = false;
 
-    public static final String WEBDAV_ROOT = UtilProperties.getPropertyValue("sandav", "sandav.webdav.root", "runtime/openapi/");
+    public static final String WEBDAV_ROOT = UtilProperties.getPropertyValue("sanddav", "sanddav.webdav.root", "runtime/openapi/");
 
     private static Method setMainResourcesMethod;
     static {
@@ -118,7 +118,7 @@ public class OpenapiWebdavServlet extends WebdavServlet {
         resp.setHeader("Access-Control-Allow-Origin", "*");
         resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         resp.setHeader("Cache-Control", "no-store");
-        resp.setHeader(HttpHeaders.SET_COOKIE, "");
+//        resp.setHeader(HttpHeaders.SET_COOKIE, "");
         super.service(req, resp);
     }
 
@@ -155,7 +155,7 @@ public class OpenapiWebdavServlet extends WebdavServlet {
         // rewriteUrl(contextPath) is expensive. cache result for later reuse
         String rewrittenContextPath = rewriteUrl(directoryWebappPath);
 
-        // Render the page header
+        // Render the json output
         sb.append("{");
         sb.append("\"resources\":[");
         sb.append("{\"name\":\"" + directoryWebappPath + "\", \"type\":\"Dir\", \"path\":\"");

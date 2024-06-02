@@ -15,6 +15,32 @@
         <param-value>sanddav</param-value>
     </context-param>
 
+    <filter>
+        <display-name>ContextFilter</display-name>
+        <filter-name>ContextFilter</filter-name>
+        <filter-class>org.apache.ofbiz.webapp.control.ContextFilter</filter-class>
+    </filter>
+    <filter>
+        <display-name>OFBizAuthnFilter</display-name>
+        <filter-name>OFBizAuthnFilter</filter-name>
+        <filter-class>langhua.openapi.webdav.OFBizAuthnFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ContextFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>OFBizAuthnFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>org.apache.ofbiz.webapp.control.ControlEventListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.apache.ofbiz.webapp.control.LoginEventListener</listener-class>
+    </listener>
+
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>
