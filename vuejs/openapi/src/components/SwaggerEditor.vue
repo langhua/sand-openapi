@@ -47,6 +47,8 @@ import SwaggerEditorStandalonePreset from '@/assets/swagger-editor-dist/swagger-
 
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import oauth2AndLogout from './SwaggerOAuth2Extend.vue'
+import checkUrlResponsePlugin from './CheckUrlResponsePlugin.vue'
 
 const editor = ref<SwaggerEditorBundle>(null)
 
@@ -63,6 +65,10 @@ const showSwaggerEditor = () => {
     // layout: 'StandaloneLayout',
     presets: [
         SwaggerEditorStandalonePreset
+    ],
+    plugins: [
+      oauth2AndLogout,
+      checkUrlResponsePlugin
     ],
     queryConfigEnabled: false,
   })

@@ -8,6 +8,7 @@ import 'swagger-ui-dist/index.css'
 import { SwaggerUIBundle, SwaggerUIStandalonePreset } from 'swagger-ui-dist'
 import { ref, watch } from 'vue'
 import oauth2AndLogout from './SwaggerOAuth2Extend.vue'
+import checkUrlResponsePlugin from './CheckUrlResponsePlugin.vue'
 
 const uri = ref<string>('')
 
@@ -24,7 +25,8 @@ const showSwaggerUi = () => {
         ],
         plugins: [
             SwaggerUIBundle.plugins.DownloadUrl,
-            oauth2AndLogout
+            oauth2AndLogout,
+            checkUrlResponsePlugin
         ],
         // 如果使用StandaloneLayout，会显示swagger-ui自带的页眉和页脚
         // layout: "StandaloneLayout"
