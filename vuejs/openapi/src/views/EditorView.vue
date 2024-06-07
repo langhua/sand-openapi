@@ -6,6 +6,9 @@
   import FileTree from '@/components/FileTree.vue'
 
   import { useRoute } from 'vue-router'
+  import router from '@/router';
+
+  const env = import.meta.env
 
   const route = useRoute()
   const fileUri = ref<string>('')
@@ -39,6 +42,15 @@
   	}, 4000);
   }
 
+  const handleFileUriMessage = (message: string) => {
+    console.log("--editor view handleFileUriMessage--")
+    if (message && message != fileUri.value) {
+      console.log("--editor view handleFileUriMessage 2--")
+      fileUri.value = message
+      router.push({path: env.VITE_OPENAPI_BASE_URL + 'editor', query: {fileUri: fileUri.value}})
+    }
+  }
+
   defineExpose ({
     openFileDrawer,
     saveEditorContent
@@ -46,9 +58,8 @@
 </script>
 
 <template>
-  <!-- <SwaggerUI /> -->
   <EditorMenu ref="editorMenuRef"/>
-  <SwaggerEditor ref="editorRef" :fileUri="fileUri"/>
+  <SwaggerEditor ref="editorRef" :fileUri="fileUri" @fileUriMessage="handleFileUriMessage"/>
 
   <div>
     <el-drawer

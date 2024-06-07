@@ -65,7 +65,7 @@
 
   defineExpose ({
     cancelSelection,
-    saveFile
+    saveFile,
   })
 </script>
 

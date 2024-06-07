@@ -56,21 +56,32 @@ const showSwaggerUi = () => {
 }
 
 export default {
-    props: {
-        fileUri: String
-    },
-    setup(props) {
-        if (props.fileUri != undefined && props.fileUri != '') {
-            uri.value = props.fileUri
-        }
-
-        watch(props, () => {
-            uri.value = props.fileUri == undefined? '' : props.fileUri
-            showSwaggerUi()
-        })
-    },
     mounted() {
         showSwaggerUi()
     }
 }
+</script>
+
+<script setup lang="ts">
+const props = defineProps({
+    fileUri: String
+})
+
+const emits = defineEmits ([
+    'fileUriMessage'
+])
+
+if (props.fileUri != undefined && props.fileUri != '') {
+    uri.value = props.fileUri
+}
+
+if (uri.value) {
+    emits('fileUriMessage', uri.value)
+}
+
+watch(props, () => {
+    uri.value = props.fileUri == undefined? '' : props.fileUri
+    showSwaggerUi()
+    emits('fileUriMessage', uri.value)
+})
 </script>

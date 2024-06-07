@@ -17,18 +17,21 @@ if (route != undefined && route.query != undefined && route.query.fileUri != und
  */
 
 const usernameError = ref<string>('')
-const showUserNameError = ref<boolean>(false)
 const passwordError = ref<string>('')
-const showPasswordError = ref<boolean>(false)
 
 const cookieAuthnFormRef = ref<FormInstance>()
 
-const cookieAuthnForm = reactive({
+interface CookieAuthnForm {
+  username: string,
+  password: string
+}
+
+const cookieAuthnForm = reactive<CookieAuthnForm>({
   username: '',
   password: ''
 })
 
-const cookieAuthnRules = reactive<FormRules<typeof cookieAuthnForm>>({
+const cookieAuthnRules = reactive<FormRules<CookieAuthnForm>>({
   username: [
     { required: true, message: 'Please input username', trigger: 'blur' },
     { min: 1, max: 80, message: 'Length should be 1 to 80', trigger: 'blur' },
@@ -40,8 +43,8 @@ const cookieAuthnRules = reactive<FormRules<typeof cookieAuthnForm>>({
 })
 
 const submitCookieAuthnForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  formEl.validate((valid) => {
+  // if (!formEl) return
+  formEl?.validate((valid) => {
     if (valid) {
       resetErrMsg()
       cookieAuthn(cookieAuthnForm)
@@ -68,13 +71,11 @@ const cookieAuthn = (cookieAuthnForm: { username: string; password: string }) =>
                             message: errMsg,
                             // duration: 4000
                           })
-                    if (errMsg.toLocaleLowerCase().indexOf("user") != -1) {
+                    if (errMsg.toLocaleLowerCase().indexOf("user") != -1 || errMsg.toLocaleLowerCase().indexOf("用户") != -1) {
                       usernameError.value = errMsg
-                      showUserNameError.value = true
                     }
-                    if (errMsg.toLocaleLowerCase().indexOf("password") != -1) {
+                    if (errMsg.toLocaleLowerCase().indexOf("password") != -1 || errMsg.toLocaleLowerCase().indexOf("密码") != -1) {
                       passwordError.value = errMsg
-                      showPasswordError.value = true
                     }
                   } else {
                     ElMessage({
@@ -101,9 +102,7 @@ const passwordRef = ref<HTMLInputElement|null>()
 
 const resetErrMsg = () => {
   usernameError.value = ''
-  showUserNameError.value = false
   passwordError.value = ''
-  showPasswordError.value = false
 }
 
 const focusPassword = () => {
@@ -169,8 +168,7 @@ const focusPassword = () => {
             :model="cookieAuthnForm"
             :rules="cookieAuthnRules">
             <el-form-item prop="username"
-              :error="usernameError"
-              :show-message="showUserNameError">
+              :error="usernameError">
               <div class="form-element form-stack">
                 <label for="username-login" class="form-label">Username</label>
                 <el-input v-model="cookieAuthnForm.username"
@@ -181,8 +179,7 @@ const focusPassword = () => {
               </div>
             </el-form-item>
             <el-form-item prop="password"
-              :error="passwordError"
-              :show-message="showPasswordError">
+              :error="passwordError">
               <div class="form-element form-stack">
                 <label for="password-login" class="form-label">Password</label>
                 <el-input 

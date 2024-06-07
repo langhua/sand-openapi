@@ -120,6 +120,10 @@ export default {
     }, 2000)
   }
 
+  const emits = defineEmits ([
+    'fileUriMessage'
+  ])
+
   defineExpose({
     saveContent
   })

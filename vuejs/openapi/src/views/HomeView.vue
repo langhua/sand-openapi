@@ -4,6 +4,9 @@
   import EditorMenu from '@/components/EditorMenu.vue'
   import FileTree from '@/components/FileTree.vue'
   import { useRoute } from 'vue-router'
+  import router from '@/router';
+
+  const env = import.meta.env
 
   const route = useRoute()
   const fileUri = ref<string>('')
@@ -34,6 +37,13 @@
   const openDrawer = () => {
   }
 
+  const handleFileUriMessage = (message: string) => {
+    if (message && message != fileUri.value) {
+      fileUri.value = message
+      router.push({path: env.VITE_OPENAPI_BASE_URL + 'viewfile', query: {fileUri: fileUri.value}})
+    }
+  }
+
   defineExpose ({
     openFileDrawer
   })
@@ -41,7 +51,7 @@
 
 <template>
   <EditorMenu ref="editorMenuRef" :fileUri="fileUri"/>
-  <SwaggerUI :fileUri="fileUri"/>
+  <SwaggerUI ref="swaggerUiRef" :fileUri="fileUri" @fileUriMessage="handleFileUriMessage"/>
 
   <div>
     <el-drawer
