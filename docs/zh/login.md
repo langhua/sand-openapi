@@ -10,6 +10,10 @@
 
 受[vue 3 项目实战一（绘制登录界面）](https://blog.csdn.net/qq_41045128/article/details/125651144)这篇文章的启发，在codepen.io上搜索login，挑选了[Melanie E Magdalena设计的登录页面Dynamic Single Page Login + Sign Up](https://codepen.io/m2creates/pen/EEvGgW)。
 
+页面设计如下图所示：
+
+<img src="images/openapi-login.png" width="500" alt="openapi-login">
+
 下载登录页面设计，如下图所示：
 
 <img src="images/export-login-design-from-codepen.png" width="500" alt="export-login-design-from-codepen">
@@ -83,7 +87,24 @@ $(function(){
 
 ## 后端实现笔记
 
+登录和认证的后端实现，是基于cookie实现的。认证流程如下图所示：
 
+<img src="images/login-flow.svg" width="500" alt="login-flow">
+
+登录流程：
+1. 用户在浏览器上输入用户名和密码，提交到后端/openapi/control/cookieAuthn。
+2. cookieAuthn里，调用LoginWorker.login(request, response)进行登录。
+3. 如果登录成功，调用ExternalLoginKeysManager.getExternalLoginKey(request)方法，建立externalLoginKey与登录用户的对应关系。
+4. 在response里，设置externalLoginKey的cookie。
+5. 浏览器保存cookie。
+
+访问sanddav文件流程：
+1. 用户在浏览器中访问sanddav文件，浏览器会把cookie中的externalLoginKey发送给后端。
+2. 通过OFBizAuthnFilter过滤器，过滤出externalLoginKey。
+3. 通过ExternalLoginKeysManager.checkExternalLoginKey(request, response)方法，得到登录用户。
+4. 返回sanddav文件。
+
+<br>
 
 ### 参考资料
 1. [vue 3 项目实战一（绘制登录界面）](https://blog.csdn.net/qq_41045128/article/details/125651144)

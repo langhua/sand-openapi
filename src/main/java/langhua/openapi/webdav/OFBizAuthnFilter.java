@@ -32,7 +32,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.Arrays;
 
 public class OFBizAuthnFilter extends OncePerRequestFilter {
     private static final String MODULE = OFBizAuthnFilter.class.getName();
@@ -43,7 +42,7 @@ public class OFBizAuthnFilter extends OncePerRequestFilter {
         try {
             if (request.getCookies() != null && request.getCookies().length > 0) {
                 for (Cookie cookie : request.getCookies()) {
-                    Debug.logInfo("== cookie: [" + cookie.getName() + "=" + cookie.getValue() + ";path=" + cookie.getPath() + "]", MODULE);
+                    // Debug.logInfo("== cookie: [" + cookie.getName() + "=" + cookie.getValue() + ";path=" + cookie.getPath() + "]", MODULE);
                     if (cookie.getName().equals("externalLoginKey") && UtilValidate.isNotEmpty(cookie.getValue())) {
                         RequestFacade requestFacade = (RequestFacade) request;
                         Field declaredField = null;
@@ -74,7 +73,7 @@ public class OFBizAuthnFilter extends OncePerRequestFilter {
         }
 
         Object userLogin = session.getAttribute("userLogin");
-        Debug.logInfo("== userLogin: " + userLogin, MODULE);
+        // Debug.logInfo("== userLogin: " + userLogin, MODULE);
         if (userLogin == null) {
             String result = LoginWorker.checkLogin(request, response);
             Debug.logInfo("result: " + result, MODULE);

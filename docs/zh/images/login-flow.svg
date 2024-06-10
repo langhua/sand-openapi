@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="287.71771mm"
+   height="103.75784mm"
+   viewBox="0 0 287.71771 103.75784"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="login-flow.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="2.5894476"
+     inkscape:cx="506.0925"
+     inkscape:cy="232.09584"
+     inkscape:window-width="3840"
+     inkscape:window-height="2036"
+     inkscape:window-x="-12"
+     inkscape:window-y="-12"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2" />
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect6838"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect6836"
+       is_visible="true"
+       lpeversion="1"
+       steps="1"
+       threshold="0.00172414"
+       smooth_angles="360"
+       helper_size="0"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect5130"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect5128"
+       is_visible="true"
+       lpeversion="1"
+       steps="1"
+       threshold="0.00172414"
+       smooth_angles="360"
+       helper_size="0"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false" />
+    <linearGradient
+       id="linearGradient3326"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#0000ff;stop-opacity:1;"
+         offset="0"
+         id="stop3324" />
+    </linearGradient>
+    <marker
+       style="overflow:visible"
+       id="RoundedArrow"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="RoundedArrow"
+       markerWidth="6.1347523"
+       markerHeight="5.9304948"
+       viewBox="0 0 6.1347524 5.9304951"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="m -0.21114562,-4.1055728 6.42229122,3.21114561 a 1,1 90 0 1 0,1.78885438 L -0.21114562,4.1055728 A 1.236068,1.236068 31.717474 0 1 -2,3 v -6 a 1.236068,1.236068 148.28253 0 1 1.78885438,-1.1055728 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path1367" />
+    </marker>
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect550"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect548"
+       is_visible="true"
+       lpeversion="1"
+       steps="1"
+       threshold="0.00172414"
+       smooth_angles="360"
+       helper_size="0"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false" />
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect548-4"
+       is_visible="true"
+       lpeversion="1"
+       steps="1"
+       threshold="0.00172414"
+       smooth_angles="360"
+       helper_size="0"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect550-8"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect548-4-2"
+       is_visible="true"
+       lpeversion="1"
+       steps="1"
+       threshold="0.00172414"
+       smooth_angles="360"
+       helper_size="0"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect550-8-8"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect548-4-2-4"
+       is_visible="true"
+       lpeversion="1"
+       steps="1"
+       threshold="0.00172414"
+       smooth_angles="360"
+       helper_size="0"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect550-8-8-4"
+       is_visible="true"
+       lpeversion="1" />
+    <marker
+       style="overflow:visible"
+       id="RoundedArrow-7"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="RoundedArrow"
+       markerWidth="6.1347523"
+       markerHeight="5.9304948"
+       viewBox="0 0 6.1347524 5.9304951"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="m -0.21114562,-4.1055728 6.42229122,3.21114561 a 1,1 90 0 1 0,1.78885438 L -0.21114562,4.1055728 A 1.236068,1.236068 31.717474 0 1 -2,3 v -6 a 1.236068,1.236068 148.28253 0 1 1.78885438,-1.1055728 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path1367-4" />
+    </marker>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3326"
+       id="linearGradient3328"
+       x1="-17.700535"
+       y1="36.221931"
+       x2="-15.711517"
+       y2="36.221931"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.2771372,0,0,1.2771372,138.7627,-1.6008369)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3326"
+       id="linearGradient6775"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.2771372,0,0,1.2771372,178.25432,33.684153)"
+       x1="-17.700535"
+       y1="36.221931"
+       x2="-15.711517"
+       y2="36.221931" />
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect5128-1"
+       is_visible="true"
+       lpeversion="1"
+       steps="1"
+       threshold="0.00172414"
+       smooth_angles="360"
+       helper_size="0"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect5130-1"
+       is_visible="true"
+       lpeversion="1" />
+  </defs>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="图层 2"
+     transform="translate(-6.4953675,-8.5661359)">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:9.13594;stroke-dasharray:none;paint-order:stroke fill markers"
+       id="rect2664-9"
+       width="278.58179"
+       height="94.621895"
+       x="11.063337"
+       y="13.134106" />
+  </g>
+  <g
+     inkscape:label="图层 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-6.4953675,-8.5661359)">
+    <text
+       xml:space="preserve"
+       style="font-size:4.93889px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.252;stroke-dasharray:none;paint-order:stroke fill markers"
+       x="48.118191"
+       y="21.751879"
+       id="text288"><tspan
+         sodipodi:role="line"
+         id="tspan286"
+         style="font-size:4.93889px;fill:#000000;stroke-width:0.252;stroke-dasharray:none"
+         x="48.118191"
+         y="21.751879">Web Browser</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.9389px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.252;stroke-dasharray:none;paint-order:stroke fill markers"
+       x="104.98981"
+       y="21.322618"
+       id="text342"><tspan
+         sodipodi:role="line"
+         id="tspan340"
+         style="fill:#000000;stroke-width:0.252;stroke-dasharray:none"
+         x="104.98981"
+         y="21.322618">/openapi</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.9389px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.252;stroke-dasharray:none;paint-order:stroke fill markers"
+       x="143.44736"
+       y="22.173903"
+       id="text346"><tspan
+         sodipodi:role="line"
+         id="tspan344"
+         style="fill:#000000;stroke-width:0.252;stroke-dasharray:none"
+         x="143.44736"
+         y="22.173903">/sanddav</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.9389px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.252;stroke-dasharray:none;paint-order:stroke fill markers"
+       x="179.98546"
+       y="22.157389"
+       id="text346-2"><tspan
+         sodipodi:role="line"
+         id="tspan344-1"
+         style="fill:#000000;stroke-width:0.252;stroke-dasharray:none"
+         x="179.98546"
+         y="22.157389">ExternalLoginKeysManager</tspan></text>
+    <path
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.252;stroke-dasharray:none;paint-order:stroke fill markers"
+       d="M 65.011717,29.920201 V 102.36407"
+       id="path546"
+       inkscape:path-effect="#path-effect548;#path-effect550"
+       inkscape:original-d="M 65.011717,29.920201 V 102.36407" />
+    <path
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.252;stroke-dasharray:none;paint-order:stroke fill markers"
+       d="M 117.37571,29.920201 V 102.36407"
+       id="path546-4"
+       inkscape:path-effect="#path-effect548-4;#path-effect550-8"
+       inkscape:original-d="M 117.37571,29.920201 V 102.36407" />
+    <path
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.252;stroke-dasharray:none;paint-order:stroke fill markers"
+       d="M 157.02061,29.920201 V 102.36407"
+       id="path546-4-6"
+       inkscape:path-effect="#path-effect548-4-2;#path-effect550-8-8"
+       inkscape:original-d="M 157.02061,29.920201 V 102.36407" />
+    <path
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.252;stroke-dasharray:none;paint-order:stroke fill markers"
+       d="M 208.31372,29.920201 V 102.36407"
+       id="path546-4-6-1"
+       inkscape:path-effect="#path-effect548-4-2-4;#path-effect550-8-8-4"
+       inkscape:original-d="M 208.31372,29.920201 V 102.36407" />
+    <path
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.246078;stroke-dasharray:none;marker-end:url(#RoundedArrow);paint-order:stroke fill markers"
+       d="M 65.469512,38.4778 H 114.67265"
+       id="path1309" />
+    <path
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.246328;stroke-dasharray:none;marker-start:url(#RoundedArrow);paint-order:stroke fill markers"
+       d="M 66.361977,50.432572 H 115.66496"
+       id="path1309-78" />
+    <path
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.325254;stroke-dasharray:none;marker-start:url(#RoundedArrow);marker-end:url(#RoundedArrow-7);paint-order:stroke fill markers"
+       d="m 120.31855,45.765682 h 85.95963"
+       id="path1309-7" />
+    <rect
+       style="fill:url(#linearGradient3328);fill-opacity:1;stroke:#0000ff;stroke-width:0.321839;stroke-dasharray:none;paint-order:stroke fill markers"
+       id="rect2664"
+       width="2.21841"
+       height="14.745902"
+       x="116.3176"
+       y="37.286591" />
+    <rect
+       style="fill:url(#linearGradient6775);fill-opacity:1;stroke:#0000ff;stroke-width:0.321839;stroke-dasharray:none;paint-order:stroke fill markers"
+       id="rect2664-0"
+       width="2.21841"
+       height="14.745902"
+       x="155.8091"
+       y="72.571587" />
+    <path
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249727;stroke-dasharray:none;marker-end:url(#RoundedArrow);paint-order:stroke fill markers"
+       d="M 65.367335,74.87221 H 154.37067"
+       id="path5126"
+       inkscape:path-effect="#path-effect5128;#path-effect5130"
+       inkscape:original-d="M 65.367335,74.87221 H 154.37067" />
+    <path
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249727;stroke-dasharray:none;marker-start:url(#RoundedArrow);paint-order:stroke fill markers"
+       d="m 66.39311,84.235983 h 89.00334"
+       id="path5126-3"
+       inkscape:path-effect="#path-effect5128-1;#path-effect5130-1"
+       inkscape:original-d="m 66.39311,84.235983 h 89.00334" />
+    <path
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.251467;stroke-dasharray:none;marker-start:url(#RoundedArrow);marker-end:url(#RoundedArrow-7);paint-order:stroke fill markers"
+       d="m 159.76104,78.515741 46.90628,-0.211442"
+       id="path6834"
+       inkscape:path-effect="#path-effect6836;#path-effect6838"
+       inkscape:original-d="m 159.76104,78.515741 46.90628,-0.211442" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.252;stroke-dasharray:none;paint-order:stroke fill markers"
+       x="53.208214"
+       y="39.995468"
+       id="text11676"><tspan
+         sodipodi:role="line"
+         id="tspan11674"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.252"
+         x="53.208214"
+         y="39.995468">登录</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.252;stroke-dasharray:none;paint-order:stroke fill markers"
+       x="34.746559"
+       y="75.905342"
+       id="text11676-68"><tspan
+         sodipodi:role="line"
+         id="tspan11674-7"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.252"
+         x="34.746559"
+         y="75.905342">访问sanddav文件</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.252;stroke-dasharray:none;paint-order:stroke fill markers"
+       x="210.39055"
+       y="46.821789"
+       id="text11676-6"><tspan
+         sodipodi:role="line"
+         id="tspan11674-0"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.252"
+         x="210.39055"
+         y="46.821789">生成externalLoginKey，userLogin键值对</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.252;stroke-dasharray:none;paint-order:stroke fill markers"
+       x="209.78641"
+       y="79.130775"
+       id="text11676-6-38"><tspan
+         sodipodi:role="line"
+         id="tspan11674-0-0"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.252"
+         x="209.78641"
+         y="79.130775">通过externalLoginKey得到userLogin</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.252;stroke-dasharray:none;paint-order:stroke fill markers"
+       x="84.303627"
+       y="73.61319"
+       id="text11676-6-38-1"><tspan
+         sodipodi:role="line"
+         id="tspan11674-0-0-1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.252"
+         x="84.303627"
+         y="73.61319">cookie中带有externalLoginKey</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.252;stroke-dasharray:none;paint-order:stroke fill markers"
+       x="10.438091"
+       y="51.440666"
+       id="text11676-6-3"><tspan
+         sodipodi:role="line"
+         id="tspan11674-0-4"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.252"
+         x="10.438091"
+         y="51.440666">externalLoginKey写入cookie</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.252;stroke-dasharray:none;paint-order:stroke fill markers"
+       x="42.344711"
+       y="85.108208"
+       id="text11676-68-8"><tspan
+         sodipodi:role="line"
+         id="tspan11674-7-3"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.252"
+         x="42.344711"
+         y="85.108208">返回文件内容</tspan></text>
+  </g>
+</svg>
